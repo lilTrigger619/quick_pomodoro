@@ -1,25 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" constent="width=device-width, initial-scale=1"/>
-    <link href="./style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./menu.css" rel="stylesheet" />
+    <link href="./newSessionCard.css" rel="stylesheet" />
   </head>
-  <title>
-    Pomodoro
-  </title>
+  <title>Pomodoro</title>
   <body>
-    <main>
-        <h2>Minute</h2>
-        <p id="minute"> </p>
-        </br>
-        <h2>Seconds</h2>
-        <p id="seconds"> </p>
-        </br>
-        <div class="meter-container">
-          <div class="meter"/>
+    <!--session engine -->
+    <div class="meter-container">
+      <div class="meter">
+        <p id="minute">00</p>
+        <p>:</p>
+        <p id="seconds">00</p>
+      </div>
+    </div>
+
+    <!-- main menu -->
+    <div id="mainMenu">
+      <div id="mainMenu-item-container">
+        <button class="mainMenu-item">
+          <h4>sessionName</h4>
+          <span id="userName">Not completed name</span>
+        </button>
+      </div>
+      <button id="addNewSession-button">+</button>
+    </div>
+
+    <!-- add new session card -->
+    <div id="addNewSession-cardContainer">
+      <form>
+        <div id="closeCard-container">
+          <div><button id="closeCard-button">X</button></div>
+          <div id="addNewSession-card">
+            <input type="text" id="addNewSession-input"/>
+            <button type="submit" id="appendSession">create</button>
+          </div>
         </div>
-    </main>
+      </form>
+    </div>
   </body>
-  <script src="./script.js">
-  </script>
+  <script src="./engine.js"></script>
+  <script src="./script.js"></script>
+  <script src="./createNewSession.js"></script>
 </html>
