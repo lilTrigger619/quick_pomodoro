@@ -1,0 +1,14 @@
+{
+  "name": "pomodoro",
+  "version": "1.0.0",
+  "description": "This is just a simple pomodoro timer app",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel ./index.html"
+  },
+  "author": "Shadrack Opoku",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}

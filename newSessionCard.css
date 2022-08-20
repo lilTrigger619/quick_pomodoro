@@ -1,0 +1,64 @@
+#addNewSession-cardContainer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .89);
+  transition: display 1s;
+}
+
+#closeCard-container {
+  max-width: 30rem;
+  margin:  auto;
+  display:flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+#closeCard-container > div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#closeCard-container > div  #closeCard-button {
+  width: 3rem;
+  height: 2rem;
+  background-color: inherit;
+  border: none;
+  color: white;
+}
+
+div#addNewSession-card {
+  width:100%;
+  height: 20rem;
+  background-color: #303030;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#addNewSession-card > input {
+  padding: .8rem;
+  width: 80%;
+  text-align: center;
+  border-radius: .3rem;
+  background-color: #dfdfdf;
+}
+
+.addNewSession-card-radio-container   {
+  display:flex;
+  height: 3rem;
+  width: 70%;
+}
+.addNewSession-card-radio-item{
+  display: flex;
+  margin: 1rem;
+  padding: .4rem;
+}
+div.addNewSession-card-radio-item > input {
+  border: none;
+  padding: 3rem;
+}
+
