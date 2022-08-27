@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="sessionDetails.svg"
+   enable-background="new">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1508">
+      <stop
+         style="stop-color:#270828;stop-opacity:1"
+         offset="0"
+         id="stop1504" />
+      <stop
+         style="stop-color:#532f5b;stop-opacity:1"
+         offset="1"
+         id="stop1506" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1508"
+       id="linearGradient1510"
+       x1="17.998886"
+       y1="14.945847"
+       x2="102.63149"
+       y2="63.673698"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1508"
+       id="linearGradient1517"
+       gradientUnits="userSpaceOnUse"
+       x1="17.998886"
+       y1="14.945847"
+       x2="102.63149"
+       y2="63.673698"
+       gradientTransform="translate(-1.3765155)" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1559">
+      <feBlend
+         inkscape:collect="always"
+         mode="color-dodge"
+         in2="BackgroundImage"
+         id="feBlend1561" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="185.63534"
+     inkscape:cy="966.72915"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="716"
+     inkscape:window-x="0"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1"
+     showguides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1537" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="filter:url(#filter1559)">
+    <rect
+       style="fill:url(#linearGradient1517);fill-opacity:1;stroke:#000000;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.99601799"
+       id="rect10"
+       width="89.535286"
+       height="53.988441"
+       x="11.719691"
+       y="9.685257" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.99601799"
+       id="rect819"
+       width="36.348656"
+       height="6.6817379"
+       x="39.555889"
+       y="13.96157" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.99601799"
+       id="rect823"
+       width="4.2763124"
+       height="5.8799295"
+       x="96.217026"
+       y="10.754335" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot825"
+       style="font-size:8px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion827"><rect
+           id="rect829"
+           width="108.08632"
+           height="113.13708"
+           x="-83.842659"
+           y="78.02195" /></flowRegion><flowPara
+         id="flowPara831" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833"
+       style="font-size:8px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff"
+       transform="matrix(0.25503697,0,0,0.19053085,4.7051313,2.8628322)"><flowRegion
+         id="flowRegion835"
+         style="fill:#ffffff"><rect
+           id="rect837"
+           width="16.162445"
+           height="22.22336"
+           x="363.65491"
+           y="40.646309"
+           style="fill:#ffffff" /></flowRegion><flowPara
+         id="flowPara839"
+         style="font-size:18.66666603px;fill:#ffffff">x</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot841"
+       style="font-size:18.66666603px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"
+       transform="scale(0.26458333)"><flowRegion
+         id="flowRegion843"
+         style="font-size:18.66666603px"><rect
+           id="rect845"
+           width="43.436569"
+           height="29.294424"
+           x="313.14725"
+           y="189.13873"
+           style="font-size:18.66666603px" /></flowRegion><flowPara
+         id="flowPara847">delete</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot859"
+       style="font-size:18.66666603px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff"
+       transform="scale(0.26458333)"><flowRegion
+         id="flowRegion861"
+         style="fill:#ffffff"><rect
+           id="rect863"
+           width="137.38074"
+           height="25.253809"
+           x="149.50258"
+           y="52.768139"
+           style="fill:#ffffff" /></flowRegion><flowPara
+         id="flowPara865">session name</flowPara></flowRoot>    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.99601799"
+       id="rect817"
+       width="11.492589"
+       height="7.7508163"
+       x="82.987183"
+       y="48.305706" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.26202321px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.17475124"
+       x="92.4897"
+       y="53.072613"
+       id="text851"
+       transform="scale(0.92818167,1.0773753)"><tspan
+         sodipodi:role="line"
+         id="tspan849"
+         x="92.4897"
+         y="53.072613"
+         style="font-size:2.79601979px;fill:#ffffff;stroke-width:0.17475124">Delete</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.39043212px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.1816303"
+       x="16.499779"
+       y="58.979088"
+       id="text855"
+       transform="scale(1.0400884,0.96145673)"><tspan
+         sodipodi:role="line"
+         x="16.499779"
+         y="58.979088"
+         style="font-size:2.90608478px;fill:#ffffff;stroke-width:0.1816303"
+         id="tspan857">12</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="session options"
+     style="opacity:1">
+    <g
+       id="g1606"
+       transform="translate(-2.3824568)">
+      <rect
+         ry="2.6458347"
+         y="21.833332"
+         x="22.489584"
+         height="26.458332"
+         width="72.760414"
+         id="rect1564"
+         style="fill:none;fill-opacity:1;stroke:#ae63b7;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.99601799" />
+      <circle
+         r="3.3072915"
+         cy="44.182568"
+         cx="58.869789"
+         id="path1566"
+         style="fill:none;fill-opacity:1;stroke:#fc00ff;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.99601799" />
+    </g>
+  </g>
+</svg>

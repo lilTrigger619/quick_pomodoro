@@ -2,12 +2,25 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Opoku Shadrack" />
+    <link
+      href="./bootstrap/scss/bootstrap.min.scss"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
     <link href="./style.css" rel="stylesheet" />
     <link href="./menu.css" rel="stylesheet" />
     <link href="./newSessionCard.css" rel="stylesheet" />
+    <link href="./sessionItemPage.css" rel="stylesheet" />
+    <script
+      defer
+      src="./bootstrap/main.js"
+      crossorigin="anonymous"
+      type="module"
+    ></script>
   </head>
   <title>Pomodoro</title>
-  <body>
+  <body class="container">
     <!--session engine -->
     <div class="meter-container">
       <div class="meter">
@@ -19,29 +32,74 @@
 
     <!-- main menu -->
     <div id="mainMenu">
+      <div id="Menu">
       <div id="mainMenu-item-container">
         <button class="mainMenu-item">
-          <h4>sessionName</h4>
-          <span id="userName">Not completed name</span>
+          <p>sessionName</p>
+          <p>Not</p>
         </button>
       </div>
       <button id="addNewSession-button">+</button>
+      </div>
     </div>
 
     <!-- add new session card -->
-    <div id="addNewSession-cardContainer">
+    <div class="addNewSession-cardContainer-hide">
       <form>
         <div id="closeCard-container">
-          <div><button id="closeCard-button">X</button></div>
+          <div><div id="closeCard-button" class="text-light">X</div></div>
           <div id="addNewSession-card">
-            <input type="text" id="addNewSession-input"/>
-            <button type="submit" id="appendSession">create</button>
+            <label class="form-label">Session Name</label>
+            <input
+              type="text"
+              class="form-control"
+              max="10"
+              min="3"
+              id="addNewSession-input"
+            />
+            <label for="addNewSession-input" class="invalid-feedback"
+              ><p>
+                Input must not be more than ten,<br />
+                not empty and <br />without a comma and whitespaces.
+              </p></label
+            >
+            <button class="btn btn-success" type="submit" id="appendSession">
+              create
+            </button>
           </div>
         </div>
       </form>
     </div>
+
+    <!-- Toast -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11" w-25 h-25>
+      <div>
+      <div
+        id="toastItem"
+        class="toast"
+        role="alert"
+        style="background-color: #303030; color: white"
+      >
+        <div class="toast-head d-flex justify-content-end">
+          <button
+            class="btn btn-close bg-primary position-relative start-10"
+            aria-label="Close"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+        <div class="toast-body" id="toast_body"></div>
+      </div>
+    </div>
+
+    <!--SessionPage-->
+    <div id="SessionItemPage" class="SessionItemPage-hide">
+      something
+    </div>
+
+    <script type="module" src="./engine.js"></script>
+    <script type="module" src="./script.js"></script>
+    <script type="module" src="./createNewSession.js"></script>
+    <script type="module" src="./menu.js"></script>
+    <script type="module" src="./sessionPage.js"></script>
   </body>
-  <script src="./engine.js"></script>
-  <script src="./script.js"></script>
-  <script src="./createNewSession.js"></script>
 </html>

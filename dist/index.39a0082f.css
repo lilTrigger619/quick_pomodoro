@@ -1,96 +1,103 @@
 @keyframes showDialog {
   from {
-    padding-top: 0px;
     opacity: .3;
+    padding-top: 0;
   }
+
   to {
-    padding-top: 3rem;
     opacity: 1;
+    padding-top: 3rem;
   }
 }
 
 .addNewSession-cardContainer-hide {
   width: 100%;
   height: 100vh;
+  opacity: 0;
+  background-color: #000000e3;
+  transition: all 1s;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, .89);
-  display: none;
-  opacity:0;
-  transition: 1s ease;
 }
+
 .addNewSession-cardContainer-show {
   width: 100%;
   height: 100vh;
+  opacity: 1;
+  background-color: #000000e3;
+  transition: all 1s;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, .89);
-  display: block;
-  opacity: 1;
-  transition: 1s ease;
 }
 
 #closeCard-container {
   max-width: 30rem;
-  margin:  auto;
-  display:flex;
   flex-direction: column;
+  margin: auto;
   padding-top: 3rem;
   animation-name: showDialog;
   animation-duration: .3s;
-}
-#closeCard-container > div {
-  width: 100%;
   display: flex;
-  justify-content: flex-end;
 }
 
-#closeCard-container > div  #closeCard-button {
+#closeCard-container > div {
+  width: 100%;
+  justify-content: flex-end;
+  display: flex;
+}
+
+#closeCard-container > div #closeCard-button {
   width: 3rem;
   height: 2rem;
   background-color: inherit;
-  border: none;
-  color: white;
+  color: #fff;
   cursor: pointer;
+  border: none;
 }
 
 div#addNewSession-card {
-  width:100%;
+  width: 100%;
   height: 20rem;
   background-color: #303030;
-  display: flex;
+  border-radius: 1rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
+  display: flex;
 }
 
 #addNewSession-card > input {
-  padding: .8rem;
-  margin-bottom: 2rem;
   width: 80%;
   text-align: center;
-  border-radius: .3rem;
   background-color: #dfdfdf;
+  border-radius: .3rem;
+  margin-bottom: 2rem;
+  padding: .8rem;
 }
 
-.addNewSession-card-radio-container   {
-  display:flex;
+.addNewSession-card-radio-container {
   height: 3rem;
   width: 70%;
-}
-.addNewSession-card-radio-item{
   display: flex;
+}
+
+.addNewSession-card-radio-item {
   margin: 1rem;
   padding: .4rem;
+  display: flex;
 }
+
 div.addNewSession-card-radio-item > input {
   border: none;
   padding: 3rem;
 }
 
 #toastItem {
-  border: 2px solid #f0b ;
+  border: 2px solid #f0b;
 }
+
+/*# sourceMappingURL=index.39a0082f.css.map */

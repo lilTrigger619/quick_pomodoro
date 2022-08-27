@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Opoku Shadrack">
+    <link href="/index.a092590d.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/index.3a01df49.css" rel="stylesheet">
+    <link href="/index.1c088b84.css" rel="stylesheet">
+    <link href="/index.39a0082f.css" rel="stylesheet">
+    <link href="/index.f69c0412.css" rel="stylesheet">
+    <script defer="" src="/index.c83b2174.js" crossorigin="anonymous"></script>
+  </head>
+  <title>Pomodoro</title>
+  <body class="container">
+    <!--session engine -->
+    <div class="meter-container">
+      <div class="meter">
+        <p id="minute">00</p>
+        <p>:</p>
+        <p id="seconds">00</p>
+      </div>
+    </div>
+
+    <!-- main menu -->
+    <div id="mainMenu">
+      <div id="Menu">
+      <div id="mainMenu-item-container">
+        <button class="mainMenu-item">
+          <p>sessionName</p>
+          <p>Not</p>
+        </button>
+      </div>
+      <button id="addNewSession-button">+</button>
+      </div>
+    </div>
+
+    <!-- add new session card -->
+    <div class="addNewSession-cardContainer-hide">
+      <form>
+        <div id="closeCard-container">
+          <div><div id="closeCard-button" class="text-light">X</div></div>
+          <div id="addNewSession-card">
+            <label class="form-label">Session Name</label>
+            <input type="text" class="form-control" max="10" min="3" id="addNewSession-input">
+            <label for="addNewSession-input" class="invalid-feedback"><p>
+                Input must not be more than ten,<br>
+                not empty and <br>without a comma and whitespaces.
+              </p></label>
+            <button class="btn btn-success" type="submit" id="appendSession">
+              create
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Toast -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11" w-25="" h-25="">
+      <div>
+      <div id="toastItem" class="toast" role="alert" style="color: #fff; background-color: #303030">
+        <div class="toast-head d-flex justify-content-end">
+          <button class="btn btn-close bg-primary position-relative start-10" aria-label="Close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body" id="toast_body"></div>
+      </div>
+    </div>
+
+    <!--SessionPage-->
+    <div id="SessionItemPage" class="SessionItemPage-hide">
+      something
+    </div>
+
+    <script src="/index.2fea4c99.js" defer=""></script>
+    <script src="/index.8cfc62b9.js" defer=""></script>
+    <script src="/index.e1396d17.js" defer=""></script>
+    <script src="/index.20c5fd1c.js" defer=""></script>
+    <script src="./sessionPage.js" defer=""></script>
+  </div></body>
+</html>

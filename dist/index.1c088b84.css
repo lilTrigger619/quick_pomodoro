@@ -1,110 +1,113 @@
 @keyframes prevPage {
   from {
-    left: 10;
     opacity: .2;
+    left: 10px;
   }
 
   to {
-    left: 0;
     opacity: 1;
+    left: 0;
   }
 }
 
-@keyframes showMenu{
+@keyframes showMenu {
   from {
+    max-width: 0;
+    height: 0;
     margin: auto;
-    max-width: 0px;
-    height: 0px;
     display: none;
   }
+
   to {
-    margin: auto;
     max-width: 35rem;
-    display: block;
     height: 24rem;
+    margin: auto;
+    display: block;
   }
 }
 
 @keyframes showMenuItems {
   0% {
-    max-height: 0px;
+    max-height: 0;
     overflow: none;
     min-height: 0;
   }
+
   99% {
     max-height: 18rem;
     overflow: none;
   }
+
   100% {
     overflow: auto;
   }
 }
 
-#mainMenu{
+#mainMenu {
   max-width: 35rem;
-  margin: auto;
   height: 24rem;
-  border: 3px solid #f0b ; 
+  border: 3px solid #f0b;
   border-radius: .8rem;
+  margin: auto;
   padding: 1rem;
 }
 
 div#Menu {
   display: block;
 }
+
 div#Menu-hide {
   display: none;
 }
 
 #mainMenu-item-container {
   max-height: 18rem;
-  overflow: auto;
-  padding: .5rem;
   margin: .5rem;
+  padding: .5rem;
   animation-name: showMenuItems;
   animation-duration: 1s;
+  overflow: auto;
 }
+
 .mainMenu-item {
   width: 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
- /* background: linear-gradient(#32BCFF, #4FC3F7);*/
-  background: linear-gradient(to top, #1e282c, #303030);
-  margin: .7rem auto;
-  padding: .7rem .8rem 0;
   width: 80%;
-  border-radius: .4rem;
-  color: white;
+  color: #fff;
+  background: linear-gradient(to top, #1e282c, #303030);
   border: none;
   border-left: 2px solid #f0b;
-  transition: .2s ease-in;
+  border-radius: .4rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: .7rem auto;
+  padding: .7rem .8rem 0;
+  transition: all .2s ease-in;
+  display: flex;
 }
 
 .mainMenu-item:hover {
   opacity: .5;
 }
 
-.mainMenu-item  p {
-  display: flex;
+.mainMenu-item p {
   justify-content: center;
   align-items: center;
+  display: flex;
 }
 
-
 #addNewSession-button {
-  padding: 1rem;
-  border-radius: 50%;
   width: 3rem;
   height: 3rem;
   background-color: inherit;
-  color: cyan;
-  border: 3px solid #f0b; 
+  color: #0ff;
+  border: 3px solid #f0b;
+  border-radius: 50%;
+  padding: 1rem;
 }
 
 #addNewSession-button:hover {
-  background-color: cyan;
-  color: black
+  color: #000;
+  background-color: #0ff;
 }
 
 .Animate-previous-page {
@@ -112,3 +115,5 @@ div#Menu-hide {
   animation-duration: 1s;
   position: relative;
 }
+
+/*# sourceMappingURL=index.1c088b84.css.map */
