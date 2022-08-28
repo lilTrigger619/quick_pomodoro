@@ -1,5 +1,5 @@
 
-const {SessionPage} = require("./sessionPage.js");
+const {SessionPage} = require("../session/sessionPage.js");
 
 const RefreshItems = (parsedItems, MenuItems) => {
   const Parent = MenuItems.parentElement;
@@ -15,7 +15,7 @@ const RefreshItems = (parsedItems, MenuItems) => {
   NewButton.textContent = "+";
   NewButton.onclick = ()=>{
     //todo ...
-    const {ShowCard} = require("./createNewSession");
+    const {ShowCard} = require("../session/createNewSession");
     const AddNewSessionCard = window.document.querySelector(".addNewSession-cardContainer-hide");
     ShowCard(AddNewSessionCard);
   }

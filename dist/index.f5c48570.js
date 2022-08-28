@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"4Q1zE":[function(require,module,exports) {
+})({"4qavH":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "bcbe8d7dc83b2174";
+module.bundle.HMR_BUNDLE_ID = "fe27fe52f5c48570";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -531,11 +531,15 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"3uaMu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _bootstrap = require("bootstrap");
-var _bootstrapDefault = parcelHelpers.interopDefault(_bootstrap);
+},{}],"8ZNvh":[function(require,module,exports) {
+//time stamp
+const Minute = window.document.getElementById("minute");
+const Seconds = window.document.getElementById("seconds");
+const Progress = window.document.getElementsByClassName("meter")[0]; /**
+const Init = new Pomo(Minute, Seconds, Progress);
+Init.focusSession();
+ **/ 
 
-},{"bootstrap":"h36JB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["4Q1zE","3uaMu"], "3uaMu", "parcelRequire7e41")
+},{}]},["4qavH","8ZNvh"], "8ZNvh", "parcelRequire7e41")
 
-//# sourceMappingURL=index.c83b2174.js.map
+//# sourceMappingURL=index.f5c48570.js.map

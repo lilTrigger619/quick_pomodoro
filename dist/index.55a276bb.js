@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"4Q1zE":[function(require,module,exports) {
+})({"7a3tR":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "bcbe8d7dc83b2174";
+module.bundle.HMR_BUNDLE_ID = "1b9c96de55a276bb";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -531,11 +531,13 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"3uaMu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _bootstrap = require("bootstrap");
-var _bootstrapDefault = parcelHelpers.interopDefault(_bootstrap);
+},{}],"93Ri1":[function(require,module,exports) {
+const MenuItems = window.document.querySelector("#mainMenu-item-container");
+const { ParseSessions  } = require("../session/createNewSession");
+const Items = ParseSessions();
+const { RefreshItems  } = require("../utils/utils");
+RefreshItems(Items, MenuItems);
 
-},{"bootstrap":"h36JB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["4Q1zE","3uaMu"], "3uaMu", "parcelRequire7e41")
+},{"../session/createNewSession":"gGH6N","../utils/utils":"5sJZc"}]},["7a3tR","93Ri1"], "93Ri1", "parcelRequire7e41")
 
-//# sourceMappingURL=index.c83b2174.js.map
+//# sourceMappingURL=index.55a276bb.js.map

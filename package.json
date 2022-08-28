@@ -2,7 +2,7 @@
   "name": "pomodoro",
   "version": "1.0.0",
   "description": "This is just a simple pomodoro timer app",
-  "source": "index.html",
+  "source": "./src/index.html",
   "scripts": {
     "start": "parcel"
   },

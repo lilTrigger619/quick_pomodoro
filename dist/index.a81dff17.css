@@ -1,0 +1,119 @@
+@keyframes prevPage {
+  from {
+    opacity: .2;
+    left: 10px;
+  }
+
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes showMenu {
+  from {
+    max-width: 0;
+    height: 0;
+    margin: auto;
+    display: none;
+  }
+
+  to {
+    max-width: 35rem;
+    height: 24rem;
+    margin: auto;
+    display: block;
+  }
+}
+
+@keyframes showMenuItems {
+  0% {
+    max-height: 0;
+    overflow: none;
+    min-height: 0;
+  }
+
+  99% {
+    max-height: 18rem;
+    overflow: none;
+  }
+
+  100% {
+    overflow: auto;
+  }
+}
+
+#mainMenu {
+  max-width: 35rem;
+  height: 24rem;
+  border: 3px solid #f0b;
+  border-radius: .8rem;
+  margin: auto;
+  padding: 1rem;
+}
+
+div#Menu {
+  display: block;
+}
+
+div#Menu-hide {
+  display: none;
+}
+
+#mainMenu-item-container {
+  max-height: 18rem;
+  margin: .5rem;
+  padding: .5rem;
+  animation-name: showMenuItems;
+  animation-duration: 1s;
+  overflow: auto;
+}
+
+.mainMenu-item {
+  width: 3rem;
+  width: 80%;
+  color: #fff;
+  background: linear-gradient(to top, #1e282c, #303030);
+  border: none;
+  border-left: 2px solid #f0b;
+  border-radius: .4rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: .7rem auto;
+  padding: .7rem .8rem 0;
+  transition: all .2s ease-in;
+  display: flex;
+}
+
+.mainMenu-item:hover {
+  opacity: .5;
+}
+
+.mainMenu-item p {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+#addNewSession-button {
+  width: 3rem;
+  height: 3rem;
+  background-color: inherit;
+  color: #0ff;
+  border: 3px solid #f0b;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+#addNewSession-button:hover {
+  color: #000;
+  background-color: #0ff;
+}
+
+.Animate-previous-page {
+  animation-name: prevPage;
+  animation-duration: 1s;
+  position: relative;
+}
+
+/*# sourceMappingURL=index.a81dff17.css.map */

@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"4Q1zE":[function(require,module,exports) {
+})({"6HKLn":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "bcbe8d7dc83b2174";
+module.bundle.HMR_BUNDLE_ID = "31aa11270eda51ac";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -531,11 +531,63 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"3uaMu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _bootstrap = require("bootstrap");
-var _bootstrapDefault = parcelHelpers.interopDefault(_bootstrap);
+},{}],"1f7ar":[function(require,module,exports) {
+class Pomo {
+    constructor(minutePlaceholder, secondsPlaceholder, progress){
+        this.level = 0;
+        this.completedSessions = 0;
+        this.minutePlaceholder = minutePlaceholder;
+        this.secondsPlaceholder = secondsPlaceholder;
+        this.Max_Level = 4;
+        this.MiliDay = 86400000;
+        this.MiliHour = 1 / 24 * this.MiliDay;
+        this.progressBar = progress;
+        this.remainingTime = 0;
+        this.Future25 = 0;
+        this.countDown = 0;
+    }
+    calcProgress = (presentTimeStamp, FutureTime)=>{
+        const ComputedFutureTime = FutureTime - presentTimeStamp;
+        this.remainingTime = this.remainingTime - 1000;
+        const Diff = this.remainingTime / ComputedFutureTime * 100;
+        this.progressBar.style.width = Diff + "%";
+    };
+    //this.longBreak = ()=>{
+    //  const theTime = {
+    //    hours: 0,
+    //    minutes: 0,
+    //    seconds: 0,
+    //  };
+    //};
+    //this.shortBreak = ()=>{};
+    focusSession = ()=>{
+        const MaxProgressWidth = 20; //in rem;
+        this.progressBar.style.width = "100%";
+        this.level++;
+        let Diff, progressWidth;
+        const PomoSlice = 25 / 60 * this.MiliHour;
+        const MiliNow = Date.now();
+        const Future25 = MiliNow + PomoSlice;
+        this.Future25 = Future25;
+        this.remainingTime = Future25 - MiliNow;
+        this.countDown = setInterval(()=>{
+            Diff = new Date(Future25 - Date.now());
+            this.minutePlaceholder.textContent = Diff.getMinutes();
+            this.secondsPlaceholder.textContent = Diff.getSeconds();
+            this.calcProgress(MiliNow, Future25);
+            if (Future25 <= Date.now()) {
+                clearInterval(this.countDown);
+                this.minutePlaceholder.textContent = "00";
+                this.secondsPlaceholder.textContent = "00";
+            }
+        }, 1000);
+    };
+    //pause focus session
+    pauseFocusSession = ()=>{
+        clearInterval(this.countDown);
+    };
+}
 
-},{"bootstrap":"h36JB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["4Q1zE","3uaMu"], "3uaMu", "parcelRequire7e41")
+},{}]},["6HKLn","1f7ar"], "1f7ar", "parcelRequire7e41")
 
-//# sourceMappingURL=index.c83b2174.js.map
+//# sourceMappingURL=index.0eda51ac.js.map

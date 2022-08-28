@@ -24,7 +24,7 @@ window.document.addEventListener("keyup", (e) => {
 Form.addEventListener("submit", (e) => {
   e.preventDefault();
   const MenuItems = window.document.querySelector("#mainMenu-item-container");
-  const {RefreshItems} = require("./utils");
+  const {RefreshItems} = require("../utils/utils");
   if (!ValidateInput()) return AddSessionInput.classList.add("is-invalid");
   const NewSession = {
     name: AddSessionInput.value,
