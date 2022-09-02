@@ -1,62 +1,56 @@
+const { SessionPage } = require("../session/sessionPage.js"); //when a menu item is clicked
 
-const {SessionPage} = require("../session/sessionPage.js");
+//refresh looping through everything with inner html
 
+//run when the page loads and when a new item is selected.
 const RefreshItems = (parsedItems, MenuItems) => {
-  const Parent = MenuItems.parentElement;
-  const MenuItemsId = MenuItems.id;
-  MenuItems.remove();
-  const AddButton = Parent.querySelector("button");
-  const AddButtonId = AddButton.id;
-  AddButton.remove()
-  const NewMenuItems = document.createElement("div");
-  const NewButton = document.createElement("button");
-  NewMenuItems.id = MenuItemsId;
-  NewButton.id = AddButtonId;
-  NewButton.textContent = "+";
-  NewButton.onclick = ()=>{
-    //todo ...
-    const {ShowCard} = require("../session/createNewSession");
-    const AddNewSessionCard = window.document.querySelector(".addNewSession-cardContainer-hide");
-    ShowCard(AddNewSessionCard);
-  }
+  console.log("refresh, parsedItems", parsedItems);
+  let html = "";
+
+  if (!parsedItems || parsedItems.length <= 0)
+    return (MenuItems.innerHTML = "<h3> No sessions </h3>");
   parsedItems.forEach((item, key) => {
-    const Button = window.document.createElement("button");
-    Button.classList.add("mainMenu-item");
-    const Name = document.createElement("p");
-    const Completed = document.createElement("p");
-    Name.textContent = item.name;
-    Completed.textContent = item.completedSessions;
-    Button.append(Name, Completed);
-    Button.onclick = ()=>SessionPage(key);
-    NewMenuItems.append(Button);
+    console.log("item", item, "key", key);
+    html +=
+      "<button class='mainMenu-item' id='item-" +
+      key +
+      "'" +
+      "value='" +
+      key +
+      "'" +
+      ">" +
+      "<p>" +
+      item.name +
+      "</p>" +
+      "<p>" +
+      item.completedSessions +
+      "</p>" +
+      "</button> \n";
   });
-  Parent.appendChild(NewMenuItems);
-  Parent.appendChild(NewButton);
+  MenuItems.innerHTML = html;
+  console.log(html);
+  console.log("menu items", MenuItems);
+
+  const $ItemsQueried = MenuItems.querySelectorAll(".mainMenu-item");
+  if (Boolean($ItemsQueried))
+    $ItemsQueried.forEach((val, key) =>
+      val.addEventListener("click", (e) => {
+        console.log("menu item clicked", e.target);
+        SessionPage(e.target.value);
+      })
+    );
+
+  /**
+   **/
 };
 
-const ShowItems = (parsedItems, MenuItems) => {
-  parsedItems.forEach((item, key) => {
-    console.log("item", item, "Key", key);
-    const Button = window.document.createElement("button");
-    Button.classList.add("mainMenu-item");
-    const Name = document.createElement("p");
-    const Completed = document.createElement("p");
-    Name.textContent = item.name;
-    Completed.textContent = item.completedSessions;
-    Button.append(Name, Completed);
-    MenuItems.append(Button);
-    MenuItems;
-  });
-};
-
-
-const _removeAllChildren = (Elem)=>{
+const _removeAllChildren = (Elem) => {
   const ElemLen = Elem.childElementCount;
-  while(ElemLen > 0){
-    Elem.children
-    for (let index = 0; index < ElemLen; index++){
+  while (ElemLen > 0) {
+    Elem.children;
+    for (let index = 0; index < ElemLen; index++) {
       Elem.children[index].remove() ?? "";
     }
   }
 };
-export {RefreshItems, ShowItems}
+export { RefreshItems };

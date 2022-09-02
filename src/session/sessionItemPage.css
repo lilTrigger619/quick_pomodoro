@@ -1,24 +1,64 @@
-@keyframes ShowPage{
-  from{
+@keyframes ShowPage {
+  from {
     opacity: 0;
+    width: 0%;
   }
-  to{
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@keyframes hidePage {
+  from {
+    display: block;
+    width: 100%;
     opacity: 1;
   }
+  to {
+    display: none;
+    width: 0%;
+    opacity: 0;
+  }
 }
 
-
-.session-item-page-coniatner-show{
-  display:flex;
+.sessionItemPageContainer-show {
+  display: block;
   width: 100%;
   height: 100%;
-  background-color: gold;
-  position:fixed;
-  left:0;
-  top:0;
+  background-color: #1e282c;
+  position: fixed;
+  right: 0;
+  top: 0;
   animation-name: ShowPage;
+  animation-duration: 0.5s;
 }
 
-.session-item-page-container-hide{
-  display:hide;
+/** This is for th first load **/
+.sessionItemPageContainer-hideFirstLoad {
+  display: none;
+}
+
+.sessionItemPageContainer-hide {
+  position: fixed;
+  background-color: #1e282c;
+  right: 0;
+  top: 0;
+  width: 0%;
+  height: 100%;
+  opacity: 0;
+  animation-name: hidePage;
+  animation-duration: 0.3s;
+}
+.sessionItem-prop_item {
+  position: relative;
+  max-height: 12rem;
+  margin: auto;
+  padding: 3rem;
+}
+
+.edit {
+  position: absolute;
+  left: 10rem;
+  bottom: 5rem;
 }

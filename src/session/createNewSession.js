@@ -28,11 +28,15 @@ Form.addEventListener("submit", (e) => {
   if (!ValidateInput()) return AddSessionInput.classList.add("is-invalid");
   const NewSession = {
     name: AddSessionInput.value,
+    about: "",
     completedSessions: 0,
     currentSessionNum: 0,
     timerFocus: 25,
     timerBreak: 5,
     timerLongBreak: 15,
+    numOfSessions: 4,
+    showNotif: false,
+    sound: false,
   };
 
   let allSessions = window.localStorage.getItem("allSessions");
@@ -78,7 +82,7 @@ NewSessionBtn.addEventListener("click", (e) => {
 
 //validation
 const ValidateInput = () =>
-  AddSessionInput.value.length <= 10 &&
+  AddSessionInput.value.length <= 20 &&
   AddSessionInput.value != "" &&
   AddSessionInput.value.indexOf(" ") == -1 && 
   AddSessionInput.value.indexOf(",") == -1;
@@ -112,10 +116,12 @@ const ShowToast = (sessionName)=>{
 //parse all items in the localstorage
 export const ParseSessions = ()=>{
   let allItems = window.localStorage.getItem("allSessions");
+  if(!allItems) return [];
   allItems = allItems.split(", ,");
   const Obj = allItems.map(vv=>{
     return JSON.parse(vv);
   });
+  console.log("Parse items", Obj);
   return Obj.reverse();
 }
 
