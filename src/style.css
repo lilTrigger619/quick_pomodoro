@@ -11,23 +11,35 @@ body{
   padding-top:3rem;
 }
 
-.meter-container {
+#main-activity {
   margin : 3rem 1rem;
   height: 3.5rem;
   width: 90%;
   border: .3rem solid green;
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 .3rem;
-  display: none;
 }
 
-.meter {
+#main-activity-meter {
   background-color: #52B649;
   height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#main-activity-remaining-sessions {
+  margin-top:1rem;
+  font-weight: 900;
+}
+#main-activity-actions {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+#main-activity-data-container{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 

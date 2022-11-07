@@ -1,9 +1,24 @@
 const SessionItemPage = window.document.querySelector("#SessionItemPage");
 const $aboutDiv = window.document.querySelector("#sessionItem-content-about");
+const $focusSessionDiv = window.document.querySelector(
+  "#sessionItem-content-focus_length"
+);
+const $shortBreakDiv = window.document.querySelector(
+  "#sessionItem-content-short_break"
+);
+const $longBreakDiv = window.document.querySelector(
+  "#sessionItem-content-long_break"
+);
+const $numOfSessionDiv = window.document.querySelector(
+  "#sessionItem-content-number_of_focus"
+);
+
+let FocusOption, AboutOption, ShortBreakOption, LongBreakOption, NumSessions;
 const { ParseSessions } = require("./createNewSession");
 let GlobalSessionId = undefined;
 
 const SessionPage = (sessionId) => {
+  window.localStorage.setItem("currentSession", sessionId);
   ItemFullPage(_getSavedSession(sessionId), sessionId);
   SessionItemPage.classList.remove("sessionItemPageContainer-hideFirstLoad");
   SessionItemPage.classList.toggle("sessionItemPageContainer-hide"); //remove the hide class.
@@ -25,9 +40,26 @@ const ItemFullPage = (_theSessionObj, _theSessionId) => {
   SessionItemPage.querySelector("#sessionItem-action_buttons").innerHTML =
     DeleteButton;
   GlobalSessionId = _theSessionId;
+
   //set the props
-  console.log('session page', SessionItemPage);
-  $aboutDiv.querySelector("p#entry").textContent=_theSessionObj.about;
+  $aboutDiv.querySelector("p#entry").textContent = _theSessionObj.about;
+  $aboutDiv.querySelector(".input").value = _theSessionObj.about;
+  $focusSessionDiv.querySelector(".entry").textContent =
+    _theSessionObj.timerFocus;
+  $focusSessionDiv.querySelector(".input").value = _theSessionObj.timerFocus;
+  $shortBreakDiv.querySelector(".entry").textContent =
+    _theSessionObj.timerBreak;
+  $shortBreakDiv.querySelector(".input").value = _theSessionObj.timerBreak;
+  $longBreakDiv.querySelector(".entry").textContent =
+    _theSessionObj.timerLongBreak;
+  $longBreakDiv.querySelector(".input").value = _theSessionObj.timerLongBreak;
+  $numOfSessionDiv.querySelector(".entry").textContent =
+    _theSessionObj.numOfSessions;
+  $numOfSessionDiv.querySelector(".input").value = _theSessionObj.numOfSessions;
+  //seting the id of the session to all buttons.
+  SessionItemPage.querySelectorAll(".edit").forEach(
+    (val) => (val.value = _theSessionId)
+  );
   //delete the item.
   const DeleteBtn = SessionItemPage.querySelector("#deleteSessionItem");
   DeleteBtn.addEventListener("click", (e) => {
@@ -41,6 +73,18 @@ const ItemFullPage = (_theSessionObj, _theSessionId) => {
       window.document.querySelector("#mainMenu-item-container")
     );
   });
+
+  //option props
+  //edit the about message
+  AboutOption = new OptionProps($aboutDiv, "about");
+  //edit the focus session
+  FocusOption = new OptionProps($focusSessionDiv, "timerFocus");
+  //short session
+  ShortBreakOption = new OptionProps($shortBreakDiv, "timerBreak");
+  //long Break
+  LongBreakOption = new OptionProps($longBreakDiv, "timerLongBreak");
+  //number of Sessions
+  NumSessions = new OptionProps($numOfSessionDiv, "numOfSessions");
 };
 
 //delete an item in the session page
@@ -64,6 +108,11 @@ _backToMenu.addEventListener("click", (e) => {
   e.preventDefault();
   SessionItemPage.classList.toggle("sessionItemPageContainer-hide");
   SessionItemPage.classList.toggle("sessionItemPageContainer-show");
+  FocusOption.removeListeners();
+  AboutOption.removeListeners();
+  ShortBreakOption.removeListeners();
+  LongBreakOption.removeListeners();
+  NumSession.removeListeners();
 });
 
 //update or edit item on the session page
@@ -74,50 +123,78 @@ const updateSession = (number)=>{
 }
  **/
 
-//edit the about session.
-let onAboutEdit = false;
-const $aboutDivEditBtn = $aboutDiv.querySelector("button#aboutEdit");
-const $aboutDivDoneEdit = $aboutDiv.querySelector("button#done");
-const $aboutDivInput = $aboutDiv.querySelector("textarea");
-console.log("input", $aboutDivEditBtn);
-$aboutDiv.addEventListener("mouseover", (e) => {
-  !onAboutEdit ? $aboutDivEditBtn.classList.toggle("hide_it") : "";
-});
-$aboutDivEditBtn.addEventListener("click", (e) => {
-  $aboutDivEditBtn.classList.add("hide_it");
-  $aboutDivInput.classList.toggle("hide_it");
-  const parsed = ParseSessions();
-  $aboutDivInput.value = parsed[GlobalSessionId].about;
-  $aboutDivDoneEdit.classList.toggle("hide_it");
-  onAboutEdit = true;
-});
-$aboutDivDoneEdit.addEventListener("click", (e) => {
-  $aboutDivInput.classList.toggle("hide_it");
-  $aboutDivDoneEdit.classList.toggle("hide_it");
-  onAboutEdit = false;
-});
-$aboutDivInput.addEventListener("change", (e) => {
-  e.preventDefault();
-  const { value } = e.target;
-  const parsed = ParseSessions();
-  const Item = parsed[GlobalSessionId];
-  console.log("item", Item);
-  Item.about = value;
-  //set is back to local storage
-  //first reverse the item
-  const RePush = [];
-  RePush.push(
-    parsed.reverse().map((val, key) => {
-      if (key == 0) return JSON.stringify(val);
-      return " ," + JSON.stringify(val);
-    })
-  );
-  window.localStorage.setItem("allSessions",RePush);
-  $aboutDiv.querySelector("p#entry").texkkktContent=value;
-});
+class OptionProps {
+  constructor(PropContainer, query) {
+    this.inputValue = "";
+    this.query = query;
+    this.onChange = false;
+    this.container = PropContainer;
+    this.editButton = this.container.querySelector("button.edit");
+    this.id = this.editButton.value;
+    this.doneButton = this.container.querySelector("button.done");
+    this.input = this.container.querySelector(".input");
+    this.entry = this.container.querySelector(".entry");
 
+    this.container.addEventListener("mouseenter", this._onmouseEnter);
+    this.container.addEventListener("mouseleave", this._onmouseLeave);
+    this.editButton.addEventListener("click", this.makeEdit);
+    this.doneButton.addEventListener("click", this.makeDone);
+    this.input.addEventListener("change", this._onchange);
+  }
 
-//edit the ... session
+  _onchange = (e) => {
+    this.inputValue = e.target.value;
+    this.entry.textContent = this.inputValue;
+  };
 
+  _onmouseEnter = () => {
+    !this.onChange ? this.editButton.classList.remove("hide_it") : undefined;
+  };
+
+  _onmouseLeave = () => {
+    this.editButton.classList.add("hide_it");
+  };
+
+  makeEdit = () => {
+    this.onChange = true;
+    this.editButton.classList.add("hide_it");
+    this.input.classList.remove("hide_it");
+    this.doneButton.classList.remove("hide_it");
+  };
+
+  makeDone = () => {
+    this.onChange = false;
+    this.input.classList.add("hide_it");
+    this.doneButton.classList.add("hide_it");
+    this.editButton.classList.remove("hide_it");
+    this.editItem();
+  };
+
+  editItem = () => {
+    const parsed = ParseSessions();
+    const Item = parsed[this.id];
+    Item[this.query] = this.inputValue;
+    this.input.value = Item[this.query];
+    //set is back to local storage
+    //first reverse the item
+    const RePush = [];
+    RePush.push(
+      parsed.reverse().map((val, key) => {
+        if (key == 0) return JSON.stringify(val);
+        return " ," + JSON.stringify(val);
+      })
+    );
+    window.localStorage.setItem("allSessions", RePush);
+  };
+
+  removeListeners = () => {
+    this.container.removeEventListener("mouseenter", this._onmouseEnter);
+    this.container.removeEventListener("mouseleave", this._onmouseLeave);
+
+    this.editButton.removeEventListener("click", this.makeEdit);
+    this.doneButton.removeEventListener("click", this.makeDone);
+    this.input.removeEventListener("change", this._onchange);
+  };
+}
 
 export { SessionPage };
