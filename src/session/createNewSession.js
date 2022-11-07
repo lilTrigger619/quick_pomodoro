@@ -121,7 +121,6 @@ export const ParseSessions = ()=>{
   const Obj = allItems.map(vv=>{
     return JSON.parse(vv);
   });
-  console.log("Parse items", Obj);
   return Obj.reverse();
 }
 

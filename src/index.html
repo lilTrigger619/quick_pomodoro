@@ -28,11 +28,32 @@
   <title>Pomodoro</title>
   <body class="container">
     <!--session engine -->
-    <div class="meter-container">
-      <div class="meter">
+    <div id="main-activity" class="hide_it">
+      <div id="main-activity-meter">
         <p id="minute">00</p>
         <p>:</p>
         <p id="seconds">00</p>
+      </div>
+
+      <!--remaining sessions till break-->
+      <div id="main-activity-remaining-sessions">
+        <span class="entry">0/4</span>
+      </div>
+
+      <!--holding actions of the page -->
+      <div id="main-activity-actions">
+        <button id="main-activity-btn-start">Start</button>
+        <button id="main-activity-btn-pause">pause</button>
+        <button id="main-activity-btn-restart"> restart </button>
+        <button id="main-activity-btn-reset"> reset </button>
+        <button id="main-activity-btn-back"> back </button>
+      </div>
+
+      <!--holding the data of the page-->
+      <div id="main-activity-data-container">
+        <p> Session name </p>
+        <p> Session message : </p>
+        <p>message ...</p>
       </div>
     </div>
 
@@ -108,50 +129,53 @@
           <!--about the session-->
           <div id="sessionItem-content-about" class="sessionItem-prop_item">
             <p>About this session:</p>
-            <p id="entry"></p>
+            <p id="entry" class="entry"></p>
             <button class="hide_it edit" id="aboutEdit">edit</button>
             <textarea
               placeholder="about this session"
-              class="hide_it"
+              class="hide_it input"
             ></textarea>
-            <button id="done" class="hide_it">done</button>
+            <button class="hide_it done">done</button>
           </div>
           <!-- focus length set and count -->
           <div
             id="sessionItem-content-focus_length"
             class="sessionItem-prop_item"
           >
-            <p>focus session duration: 25min</p>
-            <button class="hide_it edit" id="edit">edit</button>
-            <input type="range" value="25" min="5" max="120" class="hide_it" />
-            <button class="hide_it" id="done"></button>
+          <p>focus session duration : <span class="entry">25</span> min</p>
+            <button class="hide_it edit" id="focusEdit">edit</button>
+            <input type="range" value="25" min="5" max="120" class="hide_it input" />
+            <button class="hide_it done">Done</button>
           </div>
           <!-- short break length -->
           <div
             id="sessionItem-content-short_break"
             class="sessionItem-prop_item"
           >
-            <input type="range" value="5" min="2" max="60" class="hide_it" />
-            <p>short break duration: 5min</p>
-            <button>edit</button>
+            <p>short break duration: <span class="entry">5</span> min</p>
+            <button class="edit hide_it">edit</button>
+            <input type="range" value="5" min="2" max="60" class="hide_it input" />
+            <button class="done hide_it">done</button>
           </div>
           <!-- long break length -->
           <div
             id="sessionItem-content-long_break"
             class="sessionItem-prop_item"
           >
-            <p>long break duration: 10min</p>
-            <input type="range" value="10" min="2" max="720" class="hide_it" />
-            <button>edit</button>
+          <p>long break duration: <span class="entry">10</span> min</p>
+            <button class="edit hide_it">edit</button>
+            <input type="range" value="10" min="2" max="720" class="hide_it input" />
+            <button class="done hide_it">done</button>
           </div>
-          <!-- number of focus -->
+          <!-- number of focus sessions before break -->
           <div
             id="sessionItem-content-number_of_focus"
             class="sessionItem-prop_item"
           >
-            <p>4 focus sessions until break</p>
-            <input type="number" value="4" class="hide_it" />
-            <button>edit</button>
+            <p>focus sessions until break : <span class="entry"></span></p>
+            <button class="edit hide_it">edit</button>
+            <input type="number" value="4" class="hide_it input" />
+            <button class="hide_it done">done</button>
           </div>
           <!-- other settings -->
           <div
@@ -164,8 +188,10 @@
               <label for="showNoti">show notification</label>
             </div>
           </div>
+          <button id="start_pomodoro">Start Pomodoro</button>
         </div>
-        <div id="sessionItem-action_buttons"></div>
+        <div id="sessionItem-action_buttons">
+        </div>
       </div>
     </div>
 
