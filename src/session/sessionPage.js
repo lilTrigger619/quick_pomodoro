@@ -1,3 +1,4 @@
+const $mainMenu = window.document.querySelector("#mainMenu");
 const SessionItemPage = window.document.querySelector("#SessionItemPage");
 const $aboutDiv = window.document.querySelector("#sessionItem-content-about");
 const $focusSessionDiv = window.document.querySelector(
@@ -107,6 +108,7 @@ const _backToMenu = window.document.querySelector("#sessionItemPageBacktBtn");
 _backToMenu.addEventListener("click", (e) => {
   e.preventDefault();
   SessionItemPage.classList.toggle("sessionItemPageContainer-hide");
+  $mainMenu.classList.remove("hide_it");
   SessionItemPage.classList.toggle("sessionItemPageContainer-show");
   FocusOption.removeListeners();
   AboutOption.removeListeners();

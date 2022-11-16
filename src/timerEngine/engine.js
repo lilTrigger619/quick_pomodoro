@@ -1,62 +1,142 @@
 
-class Pomo {
-  constructor(minutePlaceholder, secondsPlaceholder, progress) {
-    this.level = 0;
-    this.completedSessions = 0;
-    this.minutePlaceholder = minutePlaceholder;
-    this.secondsPlaceholder = secondsPlaceholder;
-    this.Max_Level = 4;
-    this.MiliDay = 86400000;
-    this.MiliHour = (1 / 24) * this.MiliDay;
-    this.progressBar = progress;
-    this.remainingTime = 0;
-    this.Future25 = 0;
-    this.countDown = 0;
-  }
+/*
+ * When a timer is completed (focus, break, longbreak), per the user option,
+ * when he chooses auto proceed, then the count should auto matically proceeed to
+ * the next sesssion. But when the auto proceed checkbox is not checked,
+ * on completion of a timer, the session will not continue.
+ *
+ */
 
-  calcProgress = (presentTimeStamp, FutureTime)=>{
-    const ComputedFutureTime = FutureTime - presentTimeStamp;
-    this.remainingTime = this.remainingTime - 1000;
-    const Diff = ((this.remainingTime / ComputedFutureTime)*100)
-    this.progressBar.style.width = Diff+"%";
-  }
+const { ParseSessions } = require("../session/createNewSession");
+const {EditStoredItem} = require("../utils/utils");
 
-  //this.longBreak = ()=>{
-  //  const theTime = {
-  //    hours: 0,
-  //    minutes: 0,
-  //    seconds: 0,
-  //  };
-  //};
+const parsed = ParseSessions();
+console.log("\n sessions from engin \n ", parsed);
 
-  //this.shortBreak = ()=>{};
+class MainEngine {
+  constructor(focus_time, amount_of_focus, break_time, long_break_time, elem) {
+    this.focusTime = focus_time * 60;
+    this.remainingFocusTime = this.focusTime;
+    this.breakTime = break_time * 60;
+    this.remainingBreakTime = this.breakTime;
+    this.longBreakTime = long_break_time * 60;
+    this.remainingLongBreakTime = this.longBreakTime;
+    this.totalFocusAmt = amount_of_focus;
+    this.completedFocus = 0;
+    this.minuteEntry = elem.querySelector("#minute");
+    this.secondsEntry = elem.querySelector("#seconds");
+    this.currentActivity = undefined;
+    this.timer = "";
+    this.id = undefined;
+  };
 
-  focusSession = () => {
-    const MaxProgressWidth = 20; //in rem;
-    this.progressBar.style.width = "100%";
-    this.level ++;
-    let Diff, progressWidth;
-    const PomoSlice = (25 / 60) * this.MiliHour;
-    const MiliNow = Date.now();
-    const Future25 = MiliNow + PomoSlice;
-    this.Future25 = Future25;
-    this.remainingTime = Future25 - MiliNow
-    this.countDown = setInterval(() => {
-      Diff = new Date(Future25 - Date.now());
-      this.minutePlaceholder.textContent = Diff.getMinutes();
-      this.secondsPlaceholder.textContent = Diff.getSeconds();
-      this.calcProgress(MiliNow, Future25);
-      if (Future25 <= Date.now()) {
-        clearInterval(this.countDown);
-        this.minutePlaceholder.textContent = "00";
-        this.secondsPlaceholder.textContent = "00";
-      }
+  setCurrentId = (id)=>{
+    this.id = id;
+  };
+
+  focus = () => {
+    this.currentActivity = "focus";
+    this.timer = setInterval(() => {
+      //console.log("remaining focus timer", this.remainingFocusTime, "focus time", this.focusTime);
+      --this.remainingFocusTime;
+      this.minuteEntry.textContent = Math.floor(this.remainingFocusTime / 60);
+      this.secondsEntry.textContent = this.remainingFocusTime % 60;
+      console.log(
+        "minute: ",
+        this.minuteEntry.textContent,
+        "seconds: ",
+        this.secondsEntry.textContent
+      );
+      if (this.remainingFocusTime <= 0) return this._done_();
+      return "starting focus session";
     }, 1000);
   };
 
-  //pause focus session
-  pauseFocusSession = ()=>{
-    clearInterval(this.countDown);
+  breakTime = ()=>{
+    this.currentActivity = "break";
+    this.timer = setInterval(()=>{
+      --this.remainingBreakTime;
+      this.minuteEntry.textContent = Math.floor(this.remainingBreakTime/60);
+      this.secondsEntry.textContent = this.remainingBreakTime % 60;
+      console.log(
+        " break minute: ",
+        this.minuteEntry.textContent,
+        " break seconds: ",
+        this.secondsEntry.textContent
+      );
+      if (this.remainingBreakTime <= 0) return this._done_();
+      
+    }, 1000);
+  };
+
+  longBreakTime = ()=>{
+    this.currentActivity = "long break";
+    this.timer = setInterval(()=>{
+      --this.remainingLongBreakTime;
+      this.minuteEntry.textContent = Math.floor(this.remainingLongBreakTime/60);
+      this.secondsEntry.textContent = this.remainingLongBreakTime % 60;
+      console.log(
+        " break minute: ",
+        this.minuteEntry.textContent,
+        " break seconds: ",
+        this.secondsEntry.textContent
+      );
+      if (this.remainingLongBreakTime <= 0) return this._done_();
+      
+    }, 1000);
+  };
+
+  pause = ()=>{
+    clearInterval(this.timer);
   }
+
+
+  resume = ()=>{
+    switch(this.currentActivity){
+      case "focus":
+        this.focus()
+        break;
+      case "break":
+        this.breakTime();
+        break;
+      case "long break":
+        this.longBreakTime();
+        break;
+      default: 
+        this.focus();
+        break;
+     };
+  }
+
+  _done_ = () => {
+    clearInterval(this.timer);
+    this.remainingFocusTime = this.focusTime;
+    this.remainingBreakTime = this.breakTime;
+    this.remainingLongBreakTime = this.longBreakTime;
+    //this.currentActivity = undefined;
+    this._next();
+  };
+
+  reset = ()=>{
+    this.remainingFocusTime = this.focusTime;
+    this.remainingBreakTime = this.breakTime;
+    this.remainingLongBreakTime = this.longBreakTime;
+    this.currentActivity = undefined;
+    clearInterval(this.timer);
+  }
+
+  _next = ()=>{
+    if(!autoProceed) return "waiting for user interaction";
+    if(this.currentActivity == "focus") this.completedFocus++;
+    //if (this.completedFocus == 4 ) 
+  };
+
+  allSessionComplete = ()=>{
+    //edit the session object and increament the session completed.
+    EditStoredItem(this.id, {completedSessions: });
+    return undefined;
+  };
+
 }
 
+export { MainEngine };
