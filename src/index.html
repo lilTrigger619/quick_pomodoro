@@ -45,18 +45,21 @@
         <button id="main-activity-btn-start">Start</button>
         <button id="main-activity-btn-pause">pause</button>
         <button id="main-activity-btn-resume">resume</button>
-        <button id="main-activity-btn-restart"> restart </button>
-        <button id="main-activity-btn-reset"> reset </button>
-        <button id="main-activity-btn-back"> back </button>
+        <button id="main-activity-btn-restart">restart</button>
+        <button id="main-activity-btn-reset">reset</button>
+        <button id="main-activity-btn-back">back</button>
+      <audio src="../notify_sound.wav" controls></audio>
       </div>
 
       <!--holding the data of the page-->
       <div id="main-activity-data-container">
-        <p> Session name </p>
-        <p> Session message : </p>
-        <p>message ...</p>
+        <h3>Session name</h3>
+        <strong><p>Session message</p><strong>
       </div>
+
     </div>
+
+    <!-- page separator -->
 
     <!-- main menu -->
     <div id="mainMenu">
@@ -118,6 +121,9 @@
       </div>
     </div>
 
+
+    <!-- page separator -->
+
     <!--SessionPage-->
     <div
       id="SessionItemPage"
@@ -143,9 +149,15 @@
             id="sessionItem-content-focus_length"
             class="sessionItem-prop_item"
           >
-          <p>focus session duration : <span class="entry">25</span> min</p>
+            <p>focus session duration : <span class="entry">25</span> min</p>
             <button class="hide_it edit" id="focusEdit">edit</button>
-            <input type="range" value="25" min="5" max="120" class="hide_it input" />
+            <input
+              type="range"
+              value="25"
+              min="0"
+              max="60"
+              class="hide_it input"
+            />
             <button class="hide_it done">Done</button>
           </div>
           <!-- short break length -->
@@ -155,7 +167,13 @@
           >
             <p>short break duration: <span class="entry">5</span> min</p>
             <button class="edit hide_it">edit</button>
-            <input type="range" value="5" min="2" max="60" class="hide_it input" />
+            <input
+              type="range"
+              value="5"
+              min="0"
+              max="60"
+              class="hide_it input"
+            />
             <button class="done hide_it">done</button>
           </div>
           <!-- long break length -->
@@ -163,9 +181,15 @@
             id="sessionItem-content-long_break"
             class="sessionItem-prop_item"
           >
-          <p>long break duration: <span class="entry">10</span> min</p>
+            <p>long break duration: <span class="entry">10</span> min</p>
             <button class="edit hide_it">edit</button>
-            <input type="range" value="10" min="2" max="720" class="hide_it input" />
+            <input
+              type="range"
+              value="10"
+              min="2"
+              max="720"
+              class="hide_it input"
+            />
             <button class="done hide_it">done</button>
           </div>
           <!-- number of focus sessions before break -->
@@ -178,21 +202,29 @@
             <input type="number" value="4" class="hide_it input" />
             <button class="hide_it done">done</button>
           </div>
-          <!-- other settings -->
-          <div
-            id="sessionItem-content-other_settings"
-            class="sessionItem-prop_item"
-          >
-            <!-- show notification -->
-            <div>
-              <input type="checkbox" id="showNoti" />
+
+          <!-- 
+            <div
+              id="sessionItem-content-other_settings"
+              class="sessionItem-prop_item"
+            >
+
+            <div id="sessionItem-content-show_notif_container">
+              <input type="checkbox" id="showNotif" />
               <label for="showNoti">show notification</label>
             </div>
+
+            <div id="sessionItem-content-notif_sound_container">
+              <input type="checkbox" class="input" id="autoContinue" />
+              <label for="autoContinue"
+                >Auto continue to next runtime when timer is done
+              </label>
+            </div>
           </div>
+            -->
           <button id="start_pomodoro">Start Pomodoro</button>
         </div>
-        <div id="sessionItem-action_buttons">
-        </div>
+        <div id="sessionItem-action_buttons"></div>
       </div>
     </div>
 
@@ -201,5 +233,12 @@
     <script type="module" src="./session/createNewSession.js"></script>
     <script type="module" src="./menu/menu.js"></script>
     <script type="module" src="./session/sessionPage.js"></script>
+    <script type="text/javascript">
+      window.setTimeout(()=>{
+        const aud = new Audio();
+        aud.src = "http://localhost:1234/notify_sound.wav";
+        aud.play().then(cc=>console.log(cc));
+            }, 3000)
+    </script>
   </body>
 </html>
