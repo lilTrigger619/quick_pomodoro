@@ -21,13 +21,9 @@ const $makeNotifSoundDiv = window.document.querySelector(
 );
 console.log("news", $showNotifDiv, $makeNotifSoundDiv);
 
-let FocusOption,
-  AboutOption,
-  ShortBreakOption,
-  LongBreakOption,
-  NumSessions;
-  //MakeNotifSound,
-  //ShowNotif
+let FocusOption, AboutOption, ShortBreakOption, LongBreakOption, NumSessions;
+//MakeNotifSound,
+//ShowNotif
 
 const { ParseSessions } = require("./createNewSession");
 let GlobalSessionId = undefined;
@@ -76,6 +72,7 @@ const ItemFullPage = (_theSessionObj, _theSessionId) => {
   SessionItemPage.querySelectorAll(".edit").forEach(
     (val) => (val.value = _theSessionId)
   );
+
   //delete the item.
   const DeleteBtn = SessionItemPage.querySelector("#deleteSessionItem");
   DeleteBtn.addEventListener("click", (e) => {
@@ -149,8 +146,7 @@ const updateSession = (number)=>{
  **/
 
 class OptionProps {
-
-  init = (PropContainer, query)=>{
+  init = (PropContainer, query) => {
     this.inputValue = "";
     this.query = query;
     this.onChange = false;
@@ -165,7 +161,7 @@ class OptionProps {
     this.editButton.addEventListener("click", this.makeEdit);
     this.doneButton.addEventListener("click", this.makeDone);
     this.input.addEventListener("change", this._onchange);
-  }
+  };
 
   _onchange = (e) => {
     this.inputValue = e.target.value;

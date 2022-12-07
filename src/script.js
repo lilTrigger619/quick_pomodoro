@@ -5,6 +5,9 @@ const $mainActivity = window.document.querySelector("#main-activity");
 const remainingSessionsDiv = $mainActivity.querySelector(
   "#main-activity-remaining-sessions"
 );
+const $audio = window.document.querySelector("#main-activity-actions > audio");
+$audio.hidden = true;
+
 const { EditStoredItem } = require("./utils/utils");
 const { ParseSessions } = require("./session/createNewSession");
 let currentSession = "";
@@ -20,25 +23,35 @@ const Init = new Pomo(Minute, Seconds, Progress);
 Init.focusSession();
  **/
 const { MainEngine } = require("./timerEngine/engine");
-const eng = new MainEngine(01, undefined, undefined, undefined, $mainActivity);
+const EngineHandler = new MainEngine(
+  01,
+  undefined,
+  undefined,
+  undefined,
+  $mainActivity
+); //instance of Timer engine.
+
+//func for starting a new pomo page with the props from the
+//previous page
 const openPomoPage = () => {
   const AllSes = ParseSessions();
   currentSessionObj = AllSes[window.localStorage.getItem("currentSession")];
   currentSession = window.localStorage.getItem("currentSession");
-  eng.setCurrentId(currentSession);
+  EngineHandler.setCurrentId(currentSession); //setting id to the enginehandler to set all the require props
 
   //set page elements.
   remainingSessionsDiv.querySelector(".entry").textContent =
     currentSessionObj.numOfSessions;
-
   $sessionItemPage.classList.toggle("sessionItemPageContainer-hide");
   $sessionItemPage.classList.toggle("sessionItemPageContainer-show");
   $mainMenu.classList.add("hide_it");
   $mainActivity.classList.remove("hide_it");
-  EditStoredItem(currentSession, { name: "chrome sessions" });
-};
-$startPomoBtn.addEventListener("click", openPomoPage);
+  EditStoredItem(currentSession, { name: "chrome sessions" }); //this is just for testing.
+}; //end of openPomoPage function.
 
+$startPomoBtn.addEventListener("click", openPomoPage); //button from the itemProps page to the mainEngine page.
+
+//buttons to control timer.
 const $PauseButton = $mainActivity.querySelector("#main-activity-btn-pause");
 const $ResumeButton = $mainActivity.querySelector("#main-activity-btn-resume");
 const $StartButton = $mainActivity.querySelector("#main-activity-btn-start");
@@ -47,36 +60,26 @@ const $RestartButton = $mainActivity.querySelector(
 );
 const $ResetButton = $mainActivity.querySelector("#main-activity-btn-reset");
 const $BackButton = $mainActivity.querySelector("#main-activity-btn-back");
-const Pause = () => eng.pause();
-const Resume = () => eng.resume();
-const Start = () => eng.focus();
-const Reset = () => eng.reset();
-//const Reset = ()=> window
-//console.log(eng.focus()); //sta
+const Pause = () => EngineHandler.pause();
+const Resume = () => EngineHandler.resume();
+const Start = () => EngineHandler.focus();
+const Reset = () => EngineHandler.reset();
+
 //back botton click;
 const BackOnClick = () => {
-  //remove all event listener of the content
-  //no need to remove the listeners
-  /**
-  $PauseButton.removeEventListener("click",Pause);
-  $ResumeButton.removeEventListener("click", Resume);
-  $StartButton.removeEventListener("click", Start);
-  $BackButton.removeEventListener("click", BackOnClick);
-   **/
-
-  //reset the timer to stop the counter();
   Reset();
 
   //show the session item page;
   $sessionItemPage.classList.toggle("sessionItemPageContainer-hide");
   $sessionItemPage.classList.toggle("sessionItemPageContainer-show");
   $mainActivity.classList.add("hide_it");
-};
+};//end of backButton onclick.
 
 $PauseButton.addEventListener("click", Pause);
 $ResumeButton.addEventListener("click", Resume);
 $StartButton.addEventListener("click", Start);
 $BackButton.addEventListener("click", BackOnClick);
+$ResetButton.addEventListener("click", Reset);
 
 // to request for notification twice recursively.
 let notified = 0;
@@ -87,7 +90,7 @@ const setNotify = () => {
         notified++;
         if (permission == "denied") {
           showNotifyWarn();
-          notified >= 2 ? null : Notification.requestPermission(); 
+          notified >= 2 ? null : Notification.requestPermission();
           notified++;
         }
       });
@@ -106,10 +109,9 @@ const showNotifyWarn = () => {
 //get allow notification.
 setNotify();
 
-
 /**
  * always when the permission object of the notification is default
- * show a prompt to the user to accept the notification fot better 
+ * show a prompt to the user to accept the notification fot better
  * satisfaction.
  *
  */
