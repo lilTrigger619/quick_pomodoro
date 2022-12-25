@@ -76,3 +76,4 @@ function requestNotification(e) {
     .catch((err) => console.log({ err }));
   $NotifWarnModal.classList.add("hide");
 } //end of requestNotification func.
+

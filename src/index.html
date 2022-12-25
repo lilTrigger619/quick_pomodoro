@@ -39,11 +39,18 @@
         </button>
       </div>
       -->
-<div class="alert  alert-warning hide" role="alert" id="alerter">
-  <button type="button" class="btn close w-auto" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+
+      <div class="alert alert-warning hide" role="alert" id="alerter">
+        <button
+          type="button"
+          class="btn close w-auto"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
       <!--ham menu
       <div id="main-activiy-ham">menu</div>
         -->
@@ -53,12 +60,20 @@
           id="main-activity-timer-object"
           class="d-flex justify-content-center align-items-center"
         >
-          <div
-            class="w-75 h-25 center bg-dark text-light text-center m-auto d-flex flex-row align-items-center justify-content-center"
-          >
-            <h1 id="timer-minute">00</h1>
-            <h1>:</h1>
-            <h1 id="timer-seconds">00</h1>
+          <!--diplay the timer or show the click to continue-->
+          <div class="w-75">
+            <div
+              class="w-100% h-25 center bg-dark text-light text-center m-auto d-flex flex-row align-items-center justify-content-center hide"
+              id="main-activity-timerDiv"
+            >
+              <h1 id="timer-minute">00</h1>
+              <h1>:</h1>
+              <h1 id="timer-seconds">00</h1>
+            </div>
+          </div>
+
+          <div class="hide" id="main-activity-continueBtn">
+            <h2>Click to continue to <span id="continue-entry"></span></h2>
           </div>
         </div>
       </div>
@@ -101,17 +116,66 @@
         </div>
       </div>
     </div>
+    <!--end of notification warning -->
 
     <!--menu container-->
-    <div class="fixed-top hide">hello</div>
+    <div class="main-activity-menu-container hide">
+      <div id="main-activity-menu-menu">
+        <!--close menu button-->
+        <div id="main-activity-menu-close">
+          <button>x</button>
+        </div>
+
+        <!--menu content-->
+        <div id="menu content">
+          <h2>Settings</h2>
+
+          <!-- Focus session duration -->
+          <div class="menu-input-wrapper">
+            <label for="f-duration-input">Focus session duration</label>
+            <input type="number" id="f-duration-input" name="focus time"/>
+          </div>
+          <!-- Short break session duration -->
+          <div class="menu-input-wrapper">
+            <label for="sb-duration-input">Short break duration</label>
+            <input type="number" id="sb-duration-input" name="break time"/>
+          </div>
+          <!-- long break session duration -->
+          <div class="menu-input-wrapper">
+            <label for="lb-duration-input">Long break duration </label>
+            <input id="lb-duration-input" name="long break time"/>
+          </div>
+          <!-- amt of focus before long break -->
+          <div class="menu-input-wrapper">
+            <label for="amt-focus-input">Amount of focus sessions before long break</label>
+            <input type="number" id="amt-focus-input"  name="amt of focus before break"/>
+          </div>
+          <!-- Play sound-->
+          <div class="menu-input-wrapper">
+            <label for="allow-sound-check">Play notification sound</label
+            ><input id="allow-sound-check" type="checkbox" name="play sound" />
+          </div>
+          <!-- show notifications -->
+          <div class="menu-input-wrapper">
+            <label for="show-notification">Show notifications</label>
+            <input type="checkbox" id="show-notification" name="show notification"/>
+          </div>
+        </div>
+
+        <!-- reset menu button-->
+        <button id="menu-reset">save</button>
+      </div>
+    </div>
 
     <!--hidden audio -->
     <audio src="../public/notify_sound.wav" class="hide" />
 
     <script type="module" src="./js/timer.js"></script>
+    <script type="module" src="./js/requestNotification.js"></script>
     <script type="module" src="./js/exports.js"></script>
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/domQueries.js"></script>
-    <script type="module" src="./js/requestNotification.js"></script>
+    <script type="module" src="./js/storage.js"></script>
+    <script type="module" src="./js/menu.js"></script>
   </body>
 </html>

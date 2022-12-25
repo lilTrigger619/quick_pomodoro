@@ -96,16 +96,11 @@ main{
 }
 #main-activity-menu-close > button{
   align-self: flex-start;
+  justify-self: flex-start;
   border: none;
   outline: none;
   color: white;
   background: none;
-  padding: 1rem;
-}
-.menu-input-wrapper{
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 
