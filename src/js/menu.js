@@ -1,4 +1,11 @@
-const { checkStorage, ResetStorage, $MenuContainer, $MenuBtn } = require("./exports");
+const {
+  checkStorage,
+  ResetStorage,
+  $MenuContainer,
+  $MenuBtn,
+} = require("./exports");
+import {timerSetup} from "./main";
+//const { timerSetup } = require("./main");
 const $MenuResetBtn = $MenuContainer.querySelector("#menu-reset");
 const $AllMenuInputs = $MenuContainer.querySelectorAll(".menu-input-wrapper");
 let inputValues = null;
@@ -15,6 +22,7 @@ const MenuReset = () => {
 const MenuInputChange = (event) => {
   const { type, name, value, checked } = event.target;
   const settingsObj = parseSettings();
+  timerSetup(parseSettings());
   if (type == "checkbox")
     return window.localStorage.setItem(
       "PomoProps",
@@ -38,22 +46,27 @@ const redrawSettings = () => {
   const SettingsObj = parseSettings();
   for (let key in SettingsObj)
     $MenuContainer.querySelector("input[name='" + key + "']").type == "checkbox"
-      ?
-      $MenuContainer.querySelector("input[name='" + key + "']").checked = SettingsObj[key]
-      :
-      $MenuContainer.querySelector("input[name='" + key + "']").value = SettingsObj[key]
+      ? ($MenuContainer.querySelector("input[name='" + key + "']").checked =
+          SettingsObj[key])
+      : ($MenuContainer.querySelector("input[name='" + key + "']").value =
+          SettingsObj[key]);
 }; //end of redrawSettings
 
 //end of function definitions ....................
 //
 
 //on close button click
-$MenuContainer.querySelector("#main-activity-menu-close button").addEventListener("click", ()=>{
-  $MenuContainer.classList.toggle("hide");
-}) //end of eventListener.
+$MenuContainer
+  .querySelector("#main-activity-menu-close button")
+  .addEventListener("click", () => {
+    $MenuContainer.classList.toggle("hide");
+  }); //end of eventListener.
 
 //on menu show button.
-$MenuBtn.addEventListener("click", ()=>$MenuContainer.classList.toggle("hide"))
+$MenuBtn.addEventListener("click", () => {
+  redrawSettings();
+  $MenuContainer.classList.toggle("hide");
+});
 
 if ($AllMenuInputs != null) {
   $AllMenuInputs.forEach((va, ke) => {
@@ -62,7 +75,7 @@ if ($AllMenuInputs != null) {
   });
 } //end of if condition.
 
-$MenuResetBtn.addEventListener("click",MenuReset)
+$MenuResetBtn.addEventListener("click", MenuReset);
 
 checkStorage();
 redrawSettings();
