@@ -1,3 +1,4 @@
+const $mainMenu = window.document.querySelector("#mainMenu");
 const SessionItemPage = window.document.querySelector("#SessionItemPage");
 const $aboutDiv = window.document.querySelector("#sessionItem-content-about");
 const $focusSessionDiv = window.document.querySelector(
@@ -12,8 +13,18 @@ const $longBreakDiv = window.document.querySelector(
 const $numOfSessionDiv = window.document.querySelector(
   "#sessionItem-content-number_of_focus"
 );
+const $showNotifDiv = window.document.querySelector(
+  "#sessionItem-content-show_notif_container"
+);
+const $makeNotifSoundDiv = window.document.querySelector(
+  "#sessionItem-content-notif_sound_container"
+);
+console.log("news", $showNotifDiv, $makeNotifSoundDiv);
 
 let FocusOption, AboutOption, ShortBreakOption, LongBreakOption, NumSessions;
+//MakeNotifSound,
+//ShowNotif
+
 const { ParseSessions } = require("./createNewSession");
 let GlobalSessionId = undefined;
 
@@ -33,6 +44,7 @@ const _getSavedSession = (sessionId) => {
 };
 
 //push the items into a new div
+
 const ItemFullPage = (_theSessionObj, _theSessionId) => {
   const Header = "<h3>" + _theSessionObj.name + "</h3> \n";
   const DeleteButton = "<button id='deleteSessionItem'>Delete session</button>";
@@ -60,6 +72,7 @@ const ItemFullPage = (_theSessionObj, _theSessionId) => {
   SessionItemPage.querySelectorAll(".edit").forEach(
     (val) => (val.value = _theSessionId)
   );
+
   //delete the item.
   const DeleteBtn = SessionItemPage.querySelector("#deleteSessionItem");
   DeleteBtn.addEventListener("click", (e) => {
@@ -76,15 +89,23 @@ const ItemFullPage = (_theSessionObj, _theSessionId) => {
 
   //option props
   //edit the about message
-  AboutOption = new OptionProps($aboutDiv, "about");
+  AboutOption.init($aboutDiv, "about");
+
   //edit the focus session
-  FocusOption = new OptionProps($focusSessionDiv, "timerFocus");
+  FocusOption.init($focusSessionDiv, "timerFocus");
+
   //short session
-  ShortBreakOption = new OptionProps($shortBreakDiv, "timerBreak");
+  ShortBreakOption.init($shortBreakDiv, "timerBreak");
+
   //long Break
-  LongBreakOption = new OptionProps($longBreakDiv, "timerLongBreak");
-  //number of Sessions
-  NumSessions = new OptionProps($numOfSessionDiv, "numOfSessions");
+  LongBreakOption.init($longBreakDiv, "timerLongBreak");
+
+  //number of Sessions.
+  NumSessions.init($numOfSessionDiv, "numOfSessions");
+  //show notifications.
+  //ShowNotif = new OptionProps($showNotifDiv, "showNotif");
+  // play notification sound.
+  //MakeNotifSound = new OptionProps($makeNotifSoundDiv, "sound");
 };
 
 //delete an item in the session page
@@ -107,6 +128,7 @@ const _backToMenu = window.document.querySelector("#sessionItemPageBacktBtn");
 _backToMenu.addEventListener("click", (e) => {
   e.preventDefault();
   SessionItemPage.classList.toggle("sessionItemPageContainer-hide");
+  $mainMenu.classList.remove("hide_it");
   SessionItemPage.classList.toggle("sessionItemPageContainer-show");
   FocusOption.removeListeners();
   AboutOption.removeListeners();
@@ -124,7 +146,7 @@ const updateSession = (number)=>{
  **/
 
 class OptionProps {
-  constructor(PropContainer, query) {
+  init = (PropContainer, query) => {
     this.inputValue = "";
     this.query = query;
     this.onChange = false;
@@ -134,13 +156,12 @@ class OptionProps {
     this.doneButton = this.container.querySelector("button.done");
     this.input = this.container.querySelector(".input");
     this.entry = this.container.querySelector(".entry");
-
     this.container.addEventListener("mouseenter", this._onmouseEnter);
     this.container.addEventListener("mouseleave", this._onmouseLeave);
     this.editButton.addEventListener("click", this.makeEdit);
     this.doneButton.addEventListener("click", this.makeDone);
     this.input.addEventListener("change", this._onchange);
-  }
+  };
 
   _onchange = (e) => {
     this.inputValue = e.target.value;
@@ -196,5 +217,11 @@ class OptionProps {
     this.input.removeEventListener("change", this._onchange);
   };
 }
+//instantiating
+FocusOption = new OptionProps($focusSessionDiv, "timerFocus");
+AboutOption = new OptionProps($aboutDiv, "about");
+ShortBreakOption = new OptionProps($shortBreakDiv, "timerBreak");
+LongBreakOption = new OptionProps($longBreakDiv, "timerLongBreak");
+NumSessions = new OptionProps($numOfSessionDiv, "numOfSessions");
 
 export { SessionPage };

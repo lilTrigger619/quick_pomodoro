@@ -1,4 +1,5 @@
 const { SessionPage } = require("../session/sessionPage.js"); //when a menu item is clicked
+const { ParseSessions } = require("../session/createNewSession");
 
 //refresh looping through everything with inner html
 
@@ -48,4 +49,19 @@ const _removeAllChildren = (Elem) => {
     }
   }
 };
-export { RefreshItems };
+
+const EditStoredItem = (id, obj) => {
+  const AllItems = ParseSessions();
+  let item = AllItems[id];
+  item = { ...item, ...obj };
+  AllItems[id] = item;
+  let RePush = [];
+  RePush = AllItems.reverse().map((val, key) => {
+    if (key == 0) return JSON.stringify(val);
+    return " ," + JSON.stringify(val);
+  });
+  //window.localStorage.setItem("allSessions", RePush);
+  console.log("edited item", id, obj, RePush);
+};
+
+export { RefreshItems, EditStoredItem };

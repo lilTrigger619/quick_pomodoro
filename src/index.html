@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Opoku Shadrack" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
     <link
       href="../bootstrap/scss/bootstrap.min.scss"
       rel="stylesheet"
       crossorigin="anonymous"
     />
-    <link href="./style.css" rel="stylesheet" />
-    <link href="./menu/menu.css" rel="stylesheet" />
-    <link href="./session/newSessionCard.css" rel="stylesheet" />
-    <link href="./session/sessionItemPage.css" rel="stylesheet" />
     <script
       defer
       src="../bootstrap/main.js"
@@ -19,186 +16,178 @@
       type="module"
     ></script>
 
-    <style type="text/css">
-      .hide_it {
+    <style>
+      .hide {
         display: none;
       }
     </style>
   </head>
-  <title>Pomodoro</title>
-  <body class="container">
-    <!--session engine -->
-    <div id="main-activity" class="hide_it">
-      <div id="main-activity-meter">
-        <p id="minute">00</p>
-        <p>:</p>
-        <p id="seconds">00</p>
-      </div>
 
-      <!--remaining sessions till break-->
-      <div id="main-activity-remaining-sessions">
-        <span class="entry">0/4</span>
-      </div>
-
-      <!--holding actions of the page -->
-      <div id="main-activity-actions">
-        <button id="main-activity-btn-start">Start</button>
-        <button id="main-activity-btn-pause">pause</button>
-        <button id="main-activity-btn-restart"> restart </button>
-        <button id="main-activity-btn-reset"> reset </button>
-        <button id="main-activity-btn-back"> back </button>
-      </div>
-
-      <!--holding the data of the page-->
-      <div id="main-activity-data-container">
-        <p> Session name </p>
-        <p> Session message : </p>
-        <p>message ...</p>
-      </div>
-    </div>
-
-    <!-- main menu -->
-    <div id="mainMenu">
-      <div id="Menu">
-        <div id="mainMenu-item-container">
-          <h3>No sessions</h3>
-        </div>
-      </div>
-      <button id="addNewSession-button">+</button>
-      <button id="deleteAllSessions">Delete all sessions</button>
-    </div>
-
-    <!-- add new session card -->
-    <div class="addNewSession-cardContainer-hide">
-      <form>
-        <div id="closeCard-container">
-          <div><div id="closeCard-button" class="text-light">X</div></div>
-          <div id="addNewSession-card">
-            <label class="form-label">Session Name</label>
-            <input
-              type="text"
-              class="form-control"
-              max="10"
-              min="3"
-              id="addNewSession-input"
-            />
-            <label for="addNewSession-input" class="invalid-feedback"
-              ><p>
-                Input must not be more than 20 (20),<br />
-                not empty and <br />without a comma and whitespaces.
-              </p></label
-            >
-            <button class="btn btn-success" type="submit" id="appendSession">
-              create
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <!-- Toast -->
-    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11" w-25 h-25>
-      <div>
-        <div
-          id="toastItem"
-          class="toast"
-          role="alert"
-          style="background-color: #303030; color: white"
+  <body style="background-color: var(--bs-gray-800); color: white">
+    <!--main-->
+    <main id="main-activity-container">
+      <!--alert
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy shit</strong>
+        <button
+          type="button"
+          aria-label="Close"
+          data-dismiss="alert"
+          class="close"
         >
-          <div class="toast-head d-flex justify-content-end">
-            <button
-              class="btn btn-close bg-primary position-relative start-10"
-              aria-label="Close"
-              data-bs-dismiss="toast"
-            ></button>
+          x
+        </button>
+      </div>
+      -->
+
+      <div class="alert alert-warning hide" role="alert" id="alerter">
+        <button
+          type="button"
+          class="btn close w-auto"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!--ham menu
+      <div id="main-activiy-ham">menu</div>
+        -->
+      <!--timer-->
+      <div id="main-activity-timer-container">
+        <div
+          id="main-activity-timer-object"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <!--diplay the timer or show the click to continue-->
+          <div class="w-75">
+            <div
+              class="w-100% h-25 center bg-dark text-light text-center m-auto d-flex flex-row align-items-center justify-content-center hide"
+              id="main-activity-timerDiv"
+            >
+              <h1 id="timer-minute">00</h1>
+              <h1>:</h1>
+              <h1 id="timer-seconds">00</h1>
+            </div>
           </div>
-          <div class="toast-body" id="toast_body"></div>
+
+          <div class="hide" id="main-activity-continueBtn">
+            <h2>Click to continue to <span id="continue-entry"></span></h2>
+          </div>
+        </div>
+      </div>
+
+      <!--buttons-->
+      <div id="main-activity-buttons-container" class="">
+        <div id="main-activity-buttons-wrapper" class="hstack gap-3 w-100">
+          <button id="btn-menu" class="w-100 btn btn-primary">menu</button>
+          <button id="btn-pause" class="w-100 btn btn-primary">
+            pause / start
+          </button>
+          <button id="btn-reset" class="w-100 btn btn-primary">reset</button>
+        </div>
+      </div>
+    </main>
+
+    <!--notification warning -->
+    <div class="c_modal hide" id="notif-warn">
+      <div class="c_modal-content">
+        <div>
+          <div class="c_modal-header">
+            <!--
+            <h2>Warning</h2>
+            <hr />
+            -->
+          </div>
+          <div class="c_modal-body">
+            <!--
+            <p>
+              Please select allow on the prompt to enable push notifications for
+              this app to work more efficiently.
+            </p>
+            <p>Click ok to be prompted</p>
+            -->
+          </div>
+          <div class="c_modal-footer">
+            <hr />
+            <button class="btn btn-secondary">ok</button>
+          </div>
         </div>
       </div>
     </div>
+    <!--end of notification warning -->
 
-    <!--SessionPage-->
-    <div
-      id="SessionItemPage"
-      class="sessionItemPageContainer-hideFirstLoad sessionItemPageContainer-hide"
-    >
-      <div>
-        <button id="sessionItemPageBacktBtn">Backt to main Menu</button>
-        <div id="sessionItem-header"></div>
-        <div id="sessionItem-content">
-          <!--about the session-->
-          <div id="sessionItem-content-about" class="sessionItem-prop_item">
-            <p>About this session:</p>
-            <p id="entry" class="entry"></p>
-            <button class="hide_it edit" id="aboutEdit">edit</button>
-            <textarea
-              placeholder="about this session"
-              class="hide_it input"
-            ></textarea>
-            <button class="hide_it done">done</button>
+    <!--menu container-->
+    <div class="main-activity-menu-container hide">
+      <div id="main-activity-menu-menu">
+        <!--close menu button-->
+        <div id="main-activity-menu-close">
+          <button>x</button>
+        </div>
+
+        <!--menu content-->
+        <div id="menu content">
+          <h2>Settings</h2>
+
+          <!-- Focus session duration -->
+          <div class="menu-input-wrapper">
+            <label for="f-duration-input">Focus session duration</label>
+            <input type="number" id="f-duration-input" name="focus time" />
           </div>
-          <!-- focus length set and count -->
-          <div
-            id="sessionItem-content-focus_length"
-            class="sessionItem-prop_item"
-          >
-          <p>focus session duration : <span class="entry">25</span> min</p>
-            <button class="hide_it edit" id="focusEdit">edit</button>
-            <input type="range" value="25" min="5" max="120" class="hide_it input" />
-            <button class="hide_it done">Done</button>
+          <!-- Short break session duration -->
+          <div class="menu-input-wrapper">
+            <label for="sb-duration-input">Short break duration</label>
+            <input type="number" id="sb-duration-input" name="break time" />
           </div>
-          <!-- short break length -->
-          <div
-            id="sessionItem-content-short_break"
-            class="sessionItem-prop_item"
-          >
-            <p>short break duration: <span class="entry">5</span> min</p>
-            <button class="edit hide_it">edit</button>
-            <input type="range" value="5" min="2" max="60" class="hide_it input" />
-            <button class="done hide_it">done</button>
+          <!-- long break session duration -->
+          <div class="menu-input-wrapper">
+            <label for="lb-duration-input">Long break duration </label>
+            <input id="lb-duration-input" name="long break time" />
           </div>
-          <!-- long break length -->
-          <div
-            id="sessionItem-content-long_break"
-            class="sessionItem-prop_item"
-          >
-          <p>long break duration: <span class="entry">10</span> min</p>
-            <button class="edit hide_it">edit</button>
-            <input type="range" value="10" min="2" max="720" class="hide_it input" />
-            <button class="done hide_it">done</button>
+          <!-- amt of focus before long break -->
+          <div class="menu-input-wrapper">
+            <label for="amt-focus-input"
+              >Amount of focus sessions before long break</label
+            >
+            <input
+              type="number"
+              id="amt-focus-input"
+              name="amt of focus before break"
+            />
           </div>
-          <!-- number of focus sessions before break -->
-          <div
-            id="sessionItem-content-number_of_focus"
-            class="sessionItem-prop_item"
-          >
-            <p>focus sessions until break : <span class="entry"></span></p>
-            <button class="edit hide_it">edit</button>
-            <input type="number" value="4" class="hide_it input" />
-            <button class="hide_it done">done</button>
+          <!-- Play sound-->
+          <div class="menu-input-wrapper">
+            <label for="allow-sound-check">Play notification sound</label
+            ><input id="allow-sound-check" type="checkbox" name="play sound" />
           </div>
-          <!-- other settings -->
-          <div
-            id="sessionItem-content-other_settings"
-            class="sessionItem-prop_item"
-          >
-            <!-- show notification -->
-            <div>
-              <input type="checkbox" id="showNoti" />
-              <label for="showNoti">show notification</label>
-            </div>
+          <!-- show notifications -->
+          <div class="menu-input-wrapper">
+            <label for="show-notification">Show notifications</label>
+            <input
+              type="checkbox"
+              id="show-notification"
+              name="show notification"
+            />
           </div>
           <button id="start_pomodoro">Start Pomodoro</button>
         </div>
-        <div id="sessionItem-action_buttons">
-        </div>
+        <div id="sessionItem-action_buttons"></div>
+
+        <!-- reset menu button-->
+        <button id="menu-reset">save</button>
       </div>
     </div>
 
-    <script type="module" src="./timerEngine/engine.js"></script>
-    <script type="module" src="./script.js"></script>
-    <script type="module" src="./session/createNewSession.js"></script>
-    <script type="module" src="./menu/menu.js"></script>
-    <script type="module" src="./session/sessionPage.js"></script>
+    <!--hidden audio -->
+    <audio src="../public/notify_sound.wav" class="hide" />
+
+    <script type="module" src="./js/timer.js"></script>
+    <script type="module" src="./js/requestNotification.js"></script>
+    <script type="module" src="./js/exports.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/domQueries.js"></script>
+    <script type="module" src="./js/storage.js"></script>
+    <script type="module" src="./js/menu.js"></script>
   </body>
 </html>

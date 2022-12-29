@@ -1,0 +1,8 @@
+{
+  "play sound": true,
+  "focus time":"25",
+  "show notification":true,
+  "break time":"5",
+  "long break time":"10",
+  "amt of focus before break":"2"
+}
