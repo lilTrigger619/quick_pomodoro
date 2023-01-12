@@ -4,7 +4,7 @@ const {
   $MenuContainer,
   $MenuBtn,
 } = require("./exports");
-import {timerSetup} from "./main";
+import { timerSetup } from "./main";
 //const { timerSetup } = require("./main");
 const $MenuResetBtn = $MenuContainer.querySelector("#menu-reset");
 const $AllMenuInputs = $MenuContainer.querySelectorAll(".menu-input-wrapper");
@@ -44,12 +44,20 @@ export const parseSettings = () => {
 //to redraw the items on the items screen.
 const redrawSettings = () => {
   const SettingsObj = parseSettings();
-  for (let key in SettingsObj)
-    $MenuContainer.querySelector("input[name='" + key + "']").type == "checkbox"
-      ? ($MenuContainer.querySelector("input[name='" + key + "']").checked =
-          SettingsObj[key])
-      : ($MenuContainer.querySelector("input[name='" + key + "']").value =
-          SettingsObj[key]);
+  for (let key in SettingsObj) {
+    const $MenuInputElement = $MenuContainer.querySelector(
+      "input[name='" + key + "']"
+    );
+    $MenuInputElement.type == "checkbox"
+      ? ($MenuInputElement.checked = SettingsObj[key])
+      : ($MenuInputElement.value = SettingsObj[key]);
+
+    const $OutputElement =
+      $MenuInputElement.parentElement.querySelector("p.output-data");
+    $OutputElement != null
+      ? ($OutputElement.innerText = SettingsObj[key])
+      : null;
+  }
 }; //end of redrawSettings
 
 //end of function definitions ....................
@@ -66,7 +74,7 @@ $MenuContainer
 $MenuBtn.addEventListener("click", () => {
   redrawSettings();
   $MenuContainer.classList.toggle("hide");
-});
+}); // end of eventListener.
 
 if ($AllMenuInputs != null) {
   $AllMenuInputs.forEach((va, ke) => {
@@ -79,3 +87,41 @@ $MenuResetBtn.addEventListener("click", MenuReset);
 
 checkStorage();
 redrawSettings();
+
+$MenuContainer
+  .querySelectorAll("div.menu-input-wrapper > button.edit-input")
+  .forEach((Elem) => {
+    Elem.addEventListener("click", ({ target }) => {
+      //console.log({target})
+      target.classList.toggle("hide");
+      target.parentElement
+        .querySelector("button.done-edit-input")
+        .classList.toggle("hide");
+      target.parentElement
+        .querySelector("input.edit-input")
+        .classList.toggle("hide");
+      target.parentElement
+        .querySelector("p.output-data")
+        .classList.toggle("hide");
+    });
+  });
+
+//repeate for the done button.
+$MenuContainer
+  .querySelectorAll("div.menu-input-wrapper > button.done-edit-input")
+  .forEach((Elem) => {
+    Elem.addEventListener("click", ({ target }) => {
+      //console.log({target})
+      target.classList.toggle("hide");
+      target.parentElement
+        .querySelector("button.edit-input")
+        .classList.toggle("hide");
+      target.parentElement
+        .querySelector("input.edit-input")
+        .classList.toggle("hide");
+      target.parentElement
+        .querySelector("p.output-data")
+        .classList.toggle("hide");
+      redrawSettings();
+    });
+  });

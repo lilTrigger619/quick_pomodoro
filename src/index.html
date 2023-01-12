@@ -131,24 +131,36 @@
           <h2>Settings</h2>
 
           <!-- Focus session duration -->
-          <div class="menu-input-wrapper">
+          <div class="menu-input-wrapper" id="f-duration">
             <label for="f-duration-input">Focus session duration</label>
-            <input type="number" id="f-duration-input" name="focus time"/>
+            <input type="number" id="f-duration-input" name="focus time" class="edit-input hide"/>
+            <p id="f-duration-output" class="output-data">2</p>
+            <button class="edit-input">Edit</button>
+            <button class="hide done-edit-input">Done</button>
           </div>
           <!-- Short break session duration -->
           <div class="menu-input-wrapper">
             <label for="sb-duration-input">Short break duration</label>
-            <input type="number" id="sb-duration-input" name="break time"/>
+            <input type="number" id="sb-duration-input" name="break time" class="edit-input hide"/>
+            <p id="sb-duration-output" class="output-data">2</p>
+            <button class="edit-input">Edit</button>
+            <button class="hide done-edit-input">Done</button>
           </div>
           <!-- long break session duration -->
           <div class="menu-input-wrapper">
             <label for="lb-duration-input">Long break duration </label>
-            <input id="lb-duration-input" name="long break time"/>
+            <input id="lb-duration-input" name="long break time" class="edit-input hide"/>
+            <p id="lb-duration-output" class="output-data">2</p>
+            <button class="edit-input">Edit</button>
+            <button class="hide done-edit-input">Done</button>
           </div>
           <!-- amt of focus before long break -->
           <div class="menu-input-wrapper">
             <label for="amt-focus-input">Amount of focus sessions before long break</label>
-            <input type="number" id="amt-focus-input"  name="amt of focus before break"/>
+            <input type="number" id="amt-focus-input"  name="amt of focus before break" class="edit-input hide"/>
+            <p id="amt-focus-output" class="output-data">2</p>
+            <button class="edit-input">Edit</button>
+            <button class="hide done-edit-input">Done</button>
           </div>
           <!-- Play sound-->
           <div class="menu-input-wrapper">
