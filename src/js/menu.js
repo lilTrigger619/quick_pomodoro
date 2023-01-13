@@ -4,8 +4,7 @@ const {
   $MenuContainer,
   $MenuBtn,
 } = require("./exports");
-import { timerSetup } from "./main";
-//const { timerSetup } = require("./main");
+import { reDrawTimer } from "./main";
 const $MenuResetBtn = $MenuContainer.querySelector("#menu-reset");
 const $AllMenuInputs = $MenuContainer.querySelectorAll(".menu-input-wrapper");
 let inputValues = null;
@@ -22,7 +21,7 @@ const MenuReset = () => {
 const MenuInputChange = (event) => {
   const { type, name, value, checked } = event.target;
   const settingsObj = parseSettings();
-  timerSetup(parseSettings());
+  reDrawTimer();
   if (type == "checkbox")
     return window.localStorage.setItem(
       "PomoProps",
@@ -88,6 +87,7 @@ $MenuResetBtn.addEventListener("click", MenuReset);
 checkStorage();
 redrawSettings();
 
+// on menu edit button
 $MenuContainer
   .querySelectorAll("div.menu-input-wrapper > button.edit-input")
   .forEach((Elem) => {
@@ -123,5 +123,6 @@ $MenuContainer
         .querySelector("p.output-data")
         .classList.toggle("hide");
       redrawSettings();
+      reDrawTimer();
     });
   });

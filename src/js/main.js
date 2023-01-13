@@ -11,7 +11,6 @@ const {
 const { parseSettings } = require("./menu"); //imports
 const testEng = new TimerEngine(); //instance of the timer engine.
 
-
 //function definitions.
 
 //setup the props for the timer
@@ -41,46 +40,59 @@ export function ContinueDivClick({ message }) {
   });
 }
 
-//Function for eventlistener when the continue button is clicked on the timer completion.
-function onContinueClick() {
-  ContinueDivClick({ message: testEng.sessionType }).then(() => {
-    $NotiAudio.loop = false;
-    switch (testEng.sessionType) {
-      case "Long break":
-        //long break;
-        testEng.setTimer(_dataStore["long break time"]);
-        return testEng.start();
-        break;
-      case "Short break":
-        //short break;
-        testEng.setTimer(_dataStore["break time"]);
-        return testEng.start();
-        break;
-      case "Focus":
-        //focus;
-        testEng.setTimer(_dataStore["focus time"]);
-        testEng.start();
-        break;
-      default:
-        return null;
-        break;
-    }
-    testEng.start;
-  });
+// Function to show the click to continue on timer completion
+function handleClickPromise() {
+  $NotiAudio.loop = false;
+  switch (testEng.sessionType) {
+    case "Long break":
+      //long break;
+      testEng.setTimer(_dataStore["long break time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+    case "Short break":
+      //short break;
+      testEng.setTimer(_dataStore["break time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+    case "Focus":
+      //focus;
+      testEng.setTimer(_dataStore["focus time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+    default:
+      testEng.setTimer(_dataStore["focus time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+  }
 }
+//when the timer ends.
+const handleTimerEndPromise = () => {
+  console.log("got here");
+  testEng.reset();
+  $NotiAudio.loop = true;
+  _dataStore["show notification"] ? Notify() : null;
+  _dataStore["play sound"] ? $NotiAudio.play() : null;
+  ContinueDivClick({ message: testEng.sessionType }).then(handleClickPromise); //when the continuebtn is clicked timer completion.
+};
 
 const pauseStart = () => {
   if (!toggle || !testEng.inProgress) {
     testEng.draw();
     testEng
       .start()
-      .then((res) => {
-        testEng.reset();
-        $NotiAudio.loop = true;
-        _dataStore["show notification"] ? Notify() : null;
-        _dataStore["play sound"] ? $NotiAudio.play() : null;
-        onContinueClick(); //when the continuebtn is clicked timer completion.
-      }) //end of .then method.
+      .then(handleTimerEndPromise) //end of .then method.
       .catch((err) => console.log("er", err)); //end of .catch method.
     toggle = true;
   } //end of if condition.
