@@ -21,6 +21,7 @@ export const timerSetup = (_dataStore) => {
     htmlMinute: $MinuteEntry,
     htmlSeconds: $SecondsEntry,
   });
+  testEng.draw();
 }; // end of timerSetup function.
 
 //when the continue is tapped after timer completion.
@@ -46,7 +47,8 @@ function handleClickPromise() {
   switch (testEng.sessionType) {
     case "Long break":
       //long break;
-      testEng.setTimer(_dataStore["long break time"]);
+      console.log("long break duration started");
+      testEng.setTimer(parseSettings()["long break time"]);
       testEng
         .start()
         .then(handleTimerEndPromise) //end of .then method.
@@ -54,7 +56,7 @@ function handleClickPromise() {
       break;
     case "Short break":
       //short break;
-      testEng.setTimer(_dataStore["break time"]);
+      testEng.setTimer(parseSettings()["break time"]);
       testEng
         .start()
         .then(handleTimerEndPromise) //end of .then method.
@@ -62,14 +64,14 @@ function handleClickPromise() {
       break;
     case "Focus":
       //focus;
-      testEng.setTimer(_dataStore["focus time"]);
+      testEng.setTimer(parseSettings()["focus time"]);
       testEng
         .start()
         .then(handleTimerEndPromise) //end of .then method.
         .catch((err) => console.log("er", err)); //end of .catch method.
       break;
     default:
-      testEng.setTimer(_dataStore["focus time"]);
+      testEng.setTimer(parseSettings()["focus time"]);
       testEng
         .start()
         .then(handleTimerEndPromise) //end of .then method.
@@ -82,8 +84,8 @@ const handleTimerEndPromise = () => {
   console.log("got here");
   testEng.reset();
   $NotiAudio.loop = true;
-  _dataStore["show notification"] ? Notify() : null;
-  _dataStore["play sound"] ? $NotiAudio.play() : null;
+  parseSettings()["show notification"] ? Notify() : null;
+  parseSettings()["play sound"] ? $NotiAudio.play() : ($NotiAudio.loop = false);
   ContinueDivClick({ message: testEng.sessionType }).then(handleClickPromise); //when the continuebtn is clicked timer completion.
 };
 
@@ -103,11 +105,12 @@ const pauseStart = () => {
   } //end of else condition.
 };
 
+const reDrawTimer = () => testEng.draw();
+
 // end of function definitions ..........................................
 
 const _dataStore = parseSettings();
 timerSetup(_dataStore);
-console.log({ _dataStore });
 
 let toggle = false; //global state to change when the start button is clicked.
 let completed = false; //toggled when a timer is cmpleted.

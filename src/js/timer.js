@@ -18,8 +18,12 @@ class TimerEngine {
     this.remainingSec = this.seconds;
     this.$htmlMinute = htmlMinute;
     this.$htmlSeconds = htmlSeconds;
-    this.focusAmt = focusAmt;
-    this.remainingFocusAmt = this.focusAmnt;
+    this.focusAmt = parseInt(focusAmt);
+    this.remainingFocusAmt = this.focusAmt;
+    console.log({
+      remainingFocusAmt: this.remainingFocusAmt,
+      focusAmt: this.focusAmt,
+    });
   }; //end of setProps func.
 
   setTimer = (minute) => {
@@ -50,14 +54,16 @@ class TimerEngine {
   }; //end of start func.
 
   validateTimerType = () => {
+    this.sessionType == "Focus" ? --this.remainingFocusAmt : null;
     if (this.remainingFocusAmt != 0 && this.isFocus) {
       this.sessionType = "Focus";
-      --this.remainingFocusAmt;
+      console.log({ remainingFocusAmt: this.remainingFocusAmt });
     } else if (!this.isFocus && this.remainingFocusAmt != 0) {
       this.sessionType = "Short break";
     } else {
+      console.log("long break in the class");
       this.sessionType = "Long break";
-      this.this.remainingFocusAmt = this.focusAmnt;
+      this.remainingFocusAmt = this.focusAmt;
     }
     return;
   };

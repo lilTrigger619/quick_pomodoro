@@ -4,7 +4,7 @@ const {
   $MenuContainer,
   $MenuBtn,
 } = require("./exports");
-import { reDrawTimer } from "./main";
+import { timerSetup as redrawView } from "./main";
 const $MenuResetBtn = $MenuContainer.querySelector("#menu-reset");
 const $AllMenuInputs = $MenuContainer.querySelectorAll(".menu-input-wrapper");
 let inputValues = null;
@@ -21,12 +21,14 @@ const MenuReset = () => {
 const MenuInputChange = (event) => {
   const { type, name, value, checked } = event.target;
   const settingsObj = parseSettings();
-  reDrawTimer();
-  if (type == "checkbox")
+  if (type == "checkbox") {
+    redrawView({ ...settingsObj, [name]: checked });
     return window.localStorage.setItem(
       "PomoProps",
       JSON.stringify({ ...settingsObj, [name]: checked })
     );
+  }
+  redrawView({ ...settingsObj, [name]: value });
   return window.localStorage.setItem(
     "PomoProps",
     JSON.stringify({ ...settingsObj, [name]: value })
@@ -123,6 +125,5 @@ $MenuContainer
         .querySelector("p.output-data")
         .classList.toggle("hide");
       redrawSettings();
-      reDrawTimer();
     });
   });
