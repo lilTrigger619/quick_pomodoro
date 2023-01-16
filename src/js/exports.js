@@ -1,6 +1,7 @@
 export { default as TimerEngine } from "./timer";
 export { Notify } from "./utils";
 export {checkStorage, ResetStorage} from "./storage";
+//export {DrawAnimator} from "./timerAnimationCanvas";
 export {
   $MainActivity,
   $MinuteEntry,
@@ -15,5 +16,6 @@ export {
   $ContinueDiv,
   $TimerDiv,
   $MenuContainer,
+  $AnimationCanvas,
 } from "./domQueries";
 console.log('hello');

@@ -15,6 +15,7 @@ const $ContinueDiv = $MainActivity.querySelector(
   "div#main-activity-continueBtn"
 );
 const $TimerDiv = $MainActivity.querySelector("#main-activity-timerDiv");
+const $AnimationCanvas = $MainActivity.querySelector("#main-activity-svg-container");
 const $MenuContainer = window.document.documentElement.querySelector(".main-activity-menu-container");
 
 export {
@@ -31,4 +32,5 @@ export {
   $ContinueDiv,
   $TimerDiv,
   $MenuContainer,
+  $AnimationCanvas,
 };

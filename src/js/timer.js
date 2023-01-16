@@ -10,20 +10,18 @@ class TimerEngine {
     this.remainingFocusAmt = 0;
     this.sessionType = "Focus";
     this.isFocus = true;
+    this.ctxAnimation = new Object();
     console.log("init");
   } //end of constructor.
 
-  setProps = (minute, focusAmt, { htmlMinute, htmlSeconds }) => {
+  setProps = (minute, focusAmt, { htmlMinute, htmlSeconds }, ctxAnimation) => {
     this.seconds = minute * 60;
     this.remainingSec = this.seconds;
     this.$htmlMinute = htmlMinute;
     this.$htmlSeconds = htmlSeconds;
     this.focusAmt = parseInt(focusAmt);
     this.remainingFocusAmt = this.focusAmt;
-    console.log({
-      remainingFocusAmt: this.remainingFocusAmt,
-      focusAmt: this.focusAmt,
-    });
+    this.ctxAnimation = ctxAnimation;
   }; //end of setProps func.
 
   setTimer = (minute) => {
@@ -35,10 +33,15 @@ class TimerEngine {
     console.log("started");
     if (this.inProgress) return "already in progress";
     this.inProgress = true;
-
     return new Promise((resolve, reject) => {
       this.activeTimer = setInterval(() => {
         --this.remainingSec;
+    window.requestAnimationFrame(() =>
+      this.ctxAnimation.redraw({
+        percent: this.remainingSec / this.seconds,
+        color: "red",
+      })
+    );
         this.draw();
         if (this.remainingSec == 0) {
           this.inProgress = false;

@@ -9,6 +9,7 @@ const {
   $TimerDiv,
 } = require("./exports"); //imports
 const { parseSettings } = require("./menu"); //imports
+import {  DrawAnimator} from "./timerAnimationCanvas"; //imports
 const testEng = new TimerEngine(); //instance of the timer engine.
 
 //function definitions.
@@ -17,10 +18,15 @@ const testEng = new TimerEngine(); //instance of the timer engine.
 export const timerSetup = (_dataStore) => {
   const amtFocus = _dataStore["amt of focus before break"];
   const focus = _dataStore["focus time"];
-  testEng.setProps(focus, amtFocus, {
-    htmlMinute: $MinuteEntry,
-    htmlSeconds: $SecondsEntry,
-  });
+  testEng.setProps(
+    focus,
+    amtFocus,
+    {
+      htmlMinute: $MinuteEntry,
+      htmlSeconds: $SecondsEntry,
+    },
+    DrawAnimator
+  );
   testEng.draw();
 }; // end of timerSetup function.
 

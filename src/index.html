@@ -72,12 +72,17 @@
             </div>
           </div>
 
+          <!-- when the timer is done -->
           <div class="hide" id="main-activity-continueBtn">
             <h2>Click to continue to <span id="continue-entry"></span></h2>
           </div>
+
+          <!-- canvas animation -->
+          <canvas width="500" height="500" id="main-activity-svg-container">
+          </canvas>
+
         </div>
       </div>
-
       <!--buttons-->
       <div id="main-activity-buttons-container" class="">
         <div id="main-activity-buttons-wrapper" class="hstack gap-3 w-100">
@@ -133,7 +138,12 @@
           <!-- Focus session duration -->
           <div class="menu-input-wrapper" id="f-duration">
             <label for="f-duration-input">Focus session duration</label>
-            <input type="number" id="f-duration-input" name="focus time" class="edit-input hide"/>
+            <input
+              type="number"
+              id="f-duration-input"
+              name="focus time"
+              class="edit-input hide"
+            />
             <p id="f-duration-output" class="output-data">2</p>
             <button class="edit-input">Edit</button>
             <button class="hide done-edit-input">Done</button>
@@ -141,7 +151,12 @@
           <!-- Short break session duration -->
           <div class="menu-input-wrapper">
             <label for="sb-duration-input">Short break duration</label>
-            <input type="number" id="sb-duration-input" name="break time" class="edit-input hide"/>
+            <input
+              type="number"
+              id="sb-duration-input"
+              name="break time"
+              class="edit-input hide"
+            />
             <p id="sb-duration-output" class="output-data">2</p>
             <button class="edit-input">Edit</button>
             <button class="hide done-edit-input">Done</button>
@@ -149,15 +164,26 @@
           <!-- long break session duration -->
           <div class="menu-input-wrapper">
             <label for="lb-duration-input">Long break duration </label>
-            <input id="lb-duration-input" name="long break time" class="edit-input hide"/>
+            <input
+              id="lb-duration-input"
+              name="long break time"
+              class="edit-input hide"
+            />
             <p id="lb-duration-output" class="output-data">2</p>
             <button class="edit-input">Edit</button>
             <button class="hide done-edit-input">Done</button>
           </div>
           <!-- amt of focus before long break -->
           <div class="menu-input-wrapper">
-            <label for="amt-focus-input">Amount of focus sessions before long break</label>
-            <input type="number" id="amt-focus-input"  name="amt of focus before break" class="edit-input hide"/>
+            <label for="amt-focus-input"
+              >Amount of focus sessions before long break</label
+            >
+            <input
+              type="number"
+              id="amt-focus-input"
+              name="amt of focus before break"
+              class="edit-input hide"
+            />
             <p id="amt-focus-output" class="output-data">2</p>
             <button class="edit-input">Edit</button>
             <button class="hide done-edit-input">Done</button>
@@ -170,7 +196,11 @@
           <!-- show notifications -->
           <div class="menu-input-wrapper">
             <label for="show-notification">Show notifications</label>
-            <input type="checkbox" id="show-notification" name="show notification"/>
+            <input
+              type="checkbox"
+              id="show-notification"
+              name="show notification"
+            />
           </div>
         </div>
 
@@ -189,5 +219,6 @@
     <script type="module" src="./js/domQueries.js"></script>
     <script type="module" src="./js/storage.js"></script>
     <script type="module" src="./js/menu.js"></script>
+    <script type="module" src="./js/timerAnimationCanvas.js"></script>
   </body>
 </html>

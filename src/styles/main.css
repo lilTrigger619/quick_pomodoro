@@ -15,6 +15,7 @@ main{
   margin: 2rem auto;
   display:flex;
   justify-content:center;
+  position: relative;
 }
 
 #main-activity-timer-object{
@@ -106,6 +107,12 @@ main{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+}
+
+/* circle animations*/
+#main-activity-svg-container{
+  position: absolute;
+  margin: 2rem auto;
 }
 
 
