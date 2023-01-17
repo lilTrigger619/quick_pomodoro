@@ -49,17 +49,62 @@ const redrawSettings = () => {
     const $MenuInputElement = $MenuContainer.querySelector(
       "input[name='" + key + "']"
     );
-    $MenuInputElement.type == "checkbox"
-      ? ($MenuInputElement.checked = SettingsObj[key])
-      : ($MenuInputElement.value = SettingsObj[key]);
+    if ($MenuInputElement.type == "checkbox")
+      $MenuInputElement.checked = SettingsObj[key];
+    else {
+      $MenuInputElement.value = SettingsObj[key];
+      $MenuInputElement.style.backgroundSize =
+        (parseInt(SettingsObj[key]) / $MenuInputElement.max) * 100 + "% 100%";
+      const $OutputElement =
+        $MenuInputElement.parentElement.querySelector(".output-data");
 
-    const $OutputElement =
-      $MenuInputElement.parentElement.querySelector("p.output-data");
-    $OutputElement != null
-      ? ($OutputElement.innerText = SettingsObj[key])
-      : null;
+      if ($OutputElement != null) {
+        if (parseInt(SettingsObj[key]) > 60)
+          $OutputElement.value = `0${parseInt(
+            parseInt(SettingsObj[key]) / 60
+          )} : ${
+            parseInt(SettingsObj[key]) % 60 > 9
+              ? parseInt(SettingsObj[key]) % 60
+              : "0" + (parseInt(SettingsObj[key]) % 60)
+          } : 00`;
+        else
+          $OutputElement.value = `${
+            parseInt(SettingsObj[key]) > 9
+              ? parseInt(SettingsObj[key])
+              : "0" + parseInt(SettingsObj[key])
+          } : 00`;
+      }
+      if ($MenuInputElement.name == "amt of focus before break") {
+        $OutputElement.value = SettingsObj[key];
+      }
+    }
   }
 }; //end of redrawSettings
+
+const RangeChange = ({ target }) => {
+  console.log({ target }, target.type);
+  if (target.type == "checkbox") return;
+  target.style.backgroundSize = (target.value / target.max) * 100 + "% 100%";
+  let outputValue;
+  if (parseInt(target.value) > 60)
+    outputValue = ` 0${parseInt(target.value / 60)} : ${
+      parseInt(target.value) % 60 > 9
+        ? target.value % 60
+        : "0" + (target.value % 60)
+    } : 00`;
+  else
+    outputValue = `${
+      target.value.length > 1
+        ? parseInt(target.value)
+        : "0" + parseInt(target.value)
+    } : 00`;
+  if (target.name == "amt of focus before break")
+    target.parentElement.querySelector("output.output-data").value =
+      target.value;
+  else
+    target.parentElement.querySelector("output.output-data").value =
+      outputValue;
+};
 
 //end of function definitions ....................
 //
@@ -81,6 +126,7 @@ if ($AllMenuInputs != null) {
   $AllMenuInputs.forEach((va, ke) => {
     console.log("input", { va });
     va.querySelector("input").addEventListener("change", MenuInputChange);
+    va.querySelector("input").addEventListener("input", RangeChange);
   });
 } //end of if condition.
 
@@ -88,8 +134,8 @@ $MenuResetBtn.addEventListener("click", MenuReset);
 
 checkStorage();
 redrawSettings();
-
-// on menu edit button
+/**
+  // on menu edit button
 $MenuContainer
   .querySelectorAll("div.menu-input-wrapper > button.edit-input")
   .forEach((Elem) => {
@@ -127,3 +173,4 @@ $MenuContainer
       redrawSettings();
     });
   });
+  * **/
