@@ -7,9 +7,10 @@ const {
   Notify,
   $ContinueDiv,
   $TimerDiv,
+  $ResetBtn,
 } = require("./exports"); //imports
 const { parseSettings } = require("./menu"); //imports
-import {  DrawAnimator} from "./timerAnimationCanvas"; //imports
+import { DrawAnimator } from "./timerAnimationCanvas"; //imports
 const testEng = new TimerEngine(); //instance of the timer engine.
 
 //function definitions.
@@ -95,8 +96,8 @@ const handleTimerEndPromise = () => {
   ContinueDivClick({ message: testEng.sessionType }).then(handleClickPromise); //when the continuebtn is clicked timer completion.
 };
 
-const pauseStart = () => {
-  if (!toggle || !testEng.inProgress) {
+const pauseStart = (e, forcePause=false) => {
+  if ((!toggle || !testEng.inProgress) && !forcePause) {
     testEng.draw();
     testEng
       .start()
@@ -123,5 +124,9 @@ let completed = false; //toggled when a timer is cmpleted.
 
 //when the pause/start btn is clicked.
 $PauseStartBtn.addEventListener("click", pauseStart); //end of $Pause/start btn eventListener
+$ResetBtn.addEventListener("click", () => {
+  pauseStart(null,true);
+  timerSetup(parseSettings());
+});
 
 //callthe ContinueDivclick

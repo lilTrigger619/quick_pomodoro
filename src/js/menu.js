@@ -15,7 +15,8 @@ let inputValues = null;
 const MenuReset = () => {
   ResetStorage();
   redrawSettings();
-};
+  redrawView(parseSettings());
+}
 
 //when an input field in the menu is changed
 const MenuInputChange = (event) => {

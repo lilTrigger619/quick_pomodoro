@@ -84,6 +84,12 @@ class TimerEngine {
     clearInterval(this.activeTimer);
     this.draw();
     this.inProgress = false;
+    window.requestAnimationFrame(() =>
+      this.ctxAnimation.redraw({
+        percent: this.remainingSec / this.seconds,
+        color: "red",
+      })
+    );
   }; //end of pause func
 
   reset = () => {
