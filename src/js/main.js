@@ -39,9 +39,9 @@ export function ContinueDivClick({ message }) {
   $ContinueDiv.classList.remove("hide");
   return new Promise(function (resolve, reject) {
     const resolver = () => {
+      resolve();
       $TimerDiv.parentElement.classList.remove("hide");
       $ContinueDiv.classList.add("hide");
-      resolve();
       return $ContinueDiv.removeEventListener("click", resolver);
     };
     $ContinueDiv.addEventListener("click", resolver);
@@ -96,7 +96,7 @@ const handleTimerEndPromise = () => {
   ContinueDivClick({ message: testEng.sessionType }).then(handleClickPromise); //when the continuebtn is clicked timer completion.
 };
 
-const pauseStart = (e, forcePause=false) => {
+const pauseStart = (e, forcePause = false) => {
   if ((!toggle || !testEng.inProgress) && !forcePause) {
     testEng.draw();
     testEng
@@ -125,7 +125,7 @@ let completed = false; //toggled when a timer is cmpleted.
 //when the pause/start btn is clicked.
 $PauseStartBtn.addEventListener("click", pauseStart); //end of $Pause/start btn eventListener
 $ResetBtn.addEventListener("click", () => {
-  pauseStart(null,true);
+  pauseStart(null, true);
   timerSetup(parseSettings());
 });
 
