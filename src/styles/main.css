@@ -10,8 +10,8 @@ main{
 }
 
 #main-activity-timer-container{
-  width: 80%;
-  height: 30rem;
+  width: auto;
+  height: auto;
   margin: 2rem auto;
   display:flex;
   justify-content:center;
@@ -21,8 +21,9 @@ main{
 #main-activity-timer-object{
   width:30rem;
   height: 30rem;
+  object-fit: contain;
   background-color: var(--bs-teal);
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
 /**modal**/
@@ -262,23 +263,40 @@ main{
 }
 
 
+
 /*media queries*/
 
 /*tablet*/
 @media only screen and (max-width:765px){
   #main-activity-timer-object{
-    width:25rem;
-    height: 25rem;
+    /*width:25rem;
+    height: 25rem;*/
   }
 }
 
 /*mobile*/
-@media only screen and (max-width:450px){
+@media only screen and (max-width:513px){
+  #main-activity-svg-container{
+    width: 21rem;
+    height: 21rem;
+  }
   #main-activity-timer-object{
-    width:20rem;
+    width: 20rem;
     height: 20rem;
   }
-.c_modal-content > div{
-  width: 20rem;
 }
+@media only screen and (max-width:340px){
+  #main-activity-svg-container{
+    width: 16rem;
+    height: 16rem;
+  }
+  #main-activity-timer-object{
+    width: 15rem;
+    height: 15rem;
+  }
+}
+@media only screen and (max-width:450px){
+  .c_modal-content > div{
+    width: 20rem;
+  }
 }

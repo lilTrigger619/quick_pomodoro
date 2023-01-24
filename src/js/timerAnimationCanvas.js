@@ -1,5 +1,12 @@
 const { $AnimationCanvas } = require("./exports");
 
+/*
+window.addEventListener("resize", ({target})=>{
+  $AnimationCanvas.width = target.innerWidth;
+  $AnimationCanvas.height = target.innerHeight;
+});
+*/
+
 const ctx = $AnimationCanvas.getContext("2d");
 
 const circleProps = {
