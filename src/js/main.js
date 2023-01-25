@@ -8,6 +8,8 @@ const {
   $ContinueDiv,
   $TimerDiv,
   $ResetBtn,
+  $RoundsDoneEntry,
+  $RoundsRemainingEntry,
 } = require("./exports"); //imports
 const { parseSettings } = require("./menu"); //imports
 import { DrawAnimator } from "./timerAnimationCanvas"; //imports
@@ -29,6 +31,10 @@ export const timerSetup = (_dataStore) => {
     DrawAnimator
   );
   testEng.draw();
+  $RoundsDoneEntry.textContent =
+    parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
+  $RoundsRemainingEntry.textContent =
+    parseSettings()["amt of focus before break"];
 }; // end of timerSetup function.
 
 //when the continue is tapped after timer completion.
@@ -37,6 +43,9 @@ export function ContinueDivClick({ message }) {
   $ContinueDiv.querySelector("span#continue-entry").textContent = message;
   $TimerDiv.parentElement.classList.add("hide");
   $ContinueDiv.classList.remove("hide");
+  $RoundsDoneEntry.textContent =
+    parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
+  $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
   return new Promise(function (resolve, reject) {
     const resolver = () => {
       resolve();

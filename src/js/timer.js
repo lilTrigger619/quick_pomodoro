@@ -96,6 +96,17 @@ class TimerEngine {
     this.remainingSec = this.seconds;
     this.draw();
   }; //reset to the default state.
+  
+  //getters and setters
+  /**
+  get remainingFocusAmt(){
+    return this.remainingFocusAmt;
+  }
+  set remainingFocusAmt(value){
+    return this.remainingFocusAmt=value;
+  }
+   **/
 } //end of class
+
 
 export default TimerEngine;

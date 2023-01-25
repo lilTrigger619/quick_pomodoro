@@ -17,5 +17,7 @@ export {
   $TimerDiv,
   $MenuContainer,
   $AnimationCanvas,
+  $RoundsDoneEntry,
+  $RoundsRemainingEntry,
 } from "./domQueries";
 console.log('hello');

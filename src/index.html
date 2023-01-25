@@ -40,11 +40,10 @@
       <!--ham menu
       <div id="main-activiy-ham">menu</div>
         -->
-        <Center>
-        <h1>
-          Quick Pomo
-        </h1>
-        </Center>
+      <button id="btn-menu" class="position-fixed top-0 start-0">menu</button>
+      <center>
+        <h1>Quick Pomo</h1>
+      </center>
       <!--timer-->
       <div id="main-activity-timer-container">
         <div
@@ -74,13 +73,19 @@
         </div>
       </div>
       <!--buttons-->
+          <br/>
       <div id="main-activity-buttons-container" class="">
-        <div id="main-activity-buttons-wrapper" class="hstack gap-3 w-100">
-          <button id="btn-menu" class="w-100 btn btn-primary">menu</button>
-          <button id="btn-pause" class="w-100 btn btn-primary">
+        <div class="w-100 d-flex">
+          <button id="btn-pause" class="w-auto mx-auto btn btn-primary">
             pause / start
           </button>
-          <button id="btn-reset" class="w-100 btn btn-primary">reset</button>
+        </div>
+
+        <br />
+        <div>
+          <span id="rounds-done-entry">1</span>/<span id="rounds-entry">4</span>
+        <br />
+          <button id="btn-reset" class="w-10 btn btn-secondary">reset</button>
         </div>
       </div>
     </main>
@@ -204,11 +209,11 @@
         </div>
 
         <!-- reset menu button-->
-        <br/>
-        <br/>
+        <br />
+        <br />
         <button id="menu-reset">Reset Defaults</button>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </div>
     </div>
 
