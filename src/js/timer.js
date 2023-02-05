@@ -45,8 +45,8 @@ class TimerEngine {
         this.draw();
         if (this.remainingSec == 0) {
           this.inProgress = false;
-          this.isFocus = !this.isFocus;
-          this.validateTimerType();
+          //this.isFocus = !this.isFocus;
+          this.validateNextTimerType();
           clearInterval(this.activeTimer);
           return resolve(true);
         } //end of if statement.
@@ -57,8 +57,14 @@ class TimerEngine {
   }; //end of start func.
 
   //validate the session type.
-  validateTimerType = () => {
-    this.sessionType == "Focus" ? --this.remainingFocusAmt : null;
+  validateNextTimerType = () => {
+    if(this.sessionType == "Focus"){
+    --this.remainingFocusAmt 
+      this.isFocus = false;
+    }else{
+      this.isFocus = true;
+    };
+
     if (this.remainingFocusAmt != 0 && this.isFocus) {
       return (this.sessionType = "Focus");
       //console.log({ remainingFocusAmt: this.remainingFocusAmt });
@@ -75,8 +81,10 @@ class TimerEngine {
   // when the next button is clicked.
   nextSession = () => {
     clearInterval(this.activeTimer);
-    this.validateTimerType();
+    this.validateNextTimerType();
     clearInterval(this.activeTimer);
+    this.draw();
+    console.log("remain focus amt", this.remainingFocus);
   };
 
   draw = () => {
@@ -106,10 +114,14 @@ class TimerEngine {
   }; //reset to the default state.
 
   //getters and setters
-  /**
-  get remainingFocusAmt(){
+  get remainingFocus() {
     return this.remainingFocusAmt;
-  }
+  };
+
+  get getSessionType(){
+    return this.sessionType;
+  };
+  /**
   set remainingFocusAmt(value){
     return this.remainingFocusAmt=value;
   }

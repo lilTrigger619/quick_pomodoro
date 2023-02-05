@@ -31,7 +31,8 @@ export const timerSetup = (_dataStore) => {
     },
     DrawAnimator
   );
-  testEng.draw();
+  //testEng.draw();
+  reDrawTimer();
   $RoundsDoneEntry.textContent =
     parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
   $RoundsRemainingEntry.textContent =
@@ -44,9 +45,12 @@ export function ContinueDivClick({ message }) {
   $ContinueDiv.querySelector("span#continue-entry").textContent = message;
   $TimerDiv.parentElement.classList.add("hide");
   $ContinueDiv.classList.remove("hide");
+  /**
   $RoundsDoneEntry.textContent =
     parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
   $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
+   **/
+  reDrawTimer();
   return new Promise(function (resolve, reject) {
     const resolver = () => {
       resolve();
@@ -56,12 +60,11 @@ export function ContinueDivClick({ message }) {
     };
     $ContinueDiv.addEventListener("click", resolver);
   });
-}
+};
 
-// Function to show the click to continue on timer completion
-function handleClickPromise() {
-  $NotiAudio.loop = false;
-  switch (testEng.sessionType) {
+function sessionTypeTimerSetter(){
+  pauseStart(null, true);
+  switch (testEng.getSessionType) {
     case "Long break":
       //long break;
       console.log("long break duration started");
@@ -95,6 +98,12 @@ function handleClickPromise() {
         .catch((err) => console.log("er", err)); //end of .catch method.
       break;
   }
+};
+
+// Function to show the click to continue on timer completion
+function handleClickPromise() {
+  $NotiAudio.loop = false;
+  sessionTypeTimerSetter();
 }
 //when the timer ends.
 const handleTimerEndPromise = () => {
@@ -108,7 +117,8 @@ const handleTimerEndPromise = () => {
 
 const pauseStart = (e, forcePause = false) => {
   if ((!toggle || !testEng.inProgress) && !forcePause) {
-    testEng.draw();
+    //testEng.draw();
+    reDrawTimer();
     testEng
       .start()
       .then(handleTimerEndPromise) //end of .then method.
@@ -116,13 +126,19 @@ const pauseStart = (e, forcePause = false) => {
     toggle = true;
   } //end of if condition.
   else {
-    testEng.draw();
+    //testEng.draw();
+    reDrawTimer();
     testEng.pause();
     toggle = false;
   } //end of else condition.
 };
 
-const reDrawTimer = () => testEng.draw();
+const reDrawTimer = () => {
+  testEng.draw();
+  $RoundsDoneEntry.textContent =
+    parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
+  $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
+};
 
 // end of function definitions ..........................................
 
@@ -140,8 +156,17 @@ $ResetBtn.addEventListener("click", () => {
   timerSetup(parseSettings());
 });
 
+console.log({$NextSessionBtn})
 $NextSessionBtn.addEventListener("click",()=>{
-  console.log("clicked!");
+  toggle = true;
+  const settingsProps = parseSettings();
+  testEng.nextSession();
+  console.log("clicked!",
+  testEng.getSessionType);
+  sessionTypeTimerSetter();
+  pauseStart(null, true);
+  reDrawTimer();
+  //toggle = true;
 });
 
 //callthe ContinueDivclick
