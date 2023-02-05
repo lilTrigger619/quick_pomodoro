@@ -10,6 +10,7 @@ const {
   $ResetBtn,
   $RoundsDoneEntry,
   $RoundsRemainingEntry,
+  $NextSessionBtn,
 } = require("./exports"); //imports
 const { parseSettings } = require("./menu"); //imports
 import { DrawAnimator } from "./timerAnimationCanvas"; //imports
@@ -133,9 +134,14 @@ let completed = false; //toggled when a timer is cmpleted.
 
 //when the pause/start btn is clicked.
 $PauseStartBtn.addEventListener("click", pauseStart); //end of $Pause/start btn eventListener
+
 $ResetBtn.addEventListener("click", () => {
   pauseStart(null, true);
   timerSetup(parseSettings());
+});
+
+$NextSessionBtn.addEventListener("click",()=>{
+  console.log("clicked!");
 });
 
 //callthe ContinueDivclick

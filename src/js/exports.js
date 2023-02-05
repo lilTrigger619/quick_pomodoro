@@ -19,5 +19,6 @@ export {
   $AnimationCanvas,
   $RoundsDoneEntry,
   $RoundsRemainingEntry,
+  $NextSessionBtn,
 } from "./domQueries";
 console.log('hello');

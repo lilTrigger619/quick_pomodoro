@@ -36,12 +36,12 @@ class TimerEngine {
     return new Promise((resolve, reject) => {
       this.activeTimer = setInterval(() => {
         --this.remainingSec;
-    window.requestAnimationFrame(() =>
-      this.ctxAnimation.redraw({
-        percent: this.remainingSec / this.seconds,
-        color: "red",
-      })
-    );
+        window.requestAnimationFrame(() =>
+          this.ctxAnimation.redraw({
+            percent: this.remainingSec / this.seconds,
+            color: "red",
+          })
+        );
         this.draw();
         if (this.remainingSec == 0) {
           this.inProgress = false;
@@ -56,19 +56,27 @@ class TimerEngine {
     }); //end of promise method.
   }; //end of start func.
 
+  //validate the session type.
   validateTimerType = () => {
     this.sessionType == "Focus" ? --this.remainingFocusAmt : null;
     if (this.remainingFocusAmt != 0 && this.isFocus) {
-      this.sessionType = "Focus";
-      console.log({ remainingFocusAmt: this.remainingFocusAmt });
-    } else if (!this.isFocus && this.remainingFocusAmt != 0) {
-      this.sessionType = "Short break";
-    } else {
-      console.log("long break in the class");
-      this.sessionType = "Long break";
+      return (this.sessionType = "Focus");
+      //console.log({ remainingFocusAmt: this.remainingFocusAmt });
+    } else if (!this.isFocus && this.remainingFocusAmt != 0)
+      return (this.sessionType = "Short break");
+    else {
+      //console.log("long break in the class");
       this.remainingFocusAmt = this.focusAmt;
+      return (this.sessionType = "Long break");
     }
     return;
+  };
+
+  // when the next button is clicked.
+  nextSession = () => {
+    clearInterval(this.activeTimer);
+    this.validateTimerType();
+    clearInterval(this.activeTimer);
   };
 
   draw = () => {
@@ -96,7 +104,7 @@ class TimerEngine {
     this.remainingSec = this.seconds;
     this.draw();
   }; //reset to the default state.
-  
+
   //getters and setters
   /**
   get remainingFocusAmt(){
@@ -107,6 +115,5 @@ class TimerEngine {
   }
    **/
 } //end of class
-
 
 export default TimerEngine;

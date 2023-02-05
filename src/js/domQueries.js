@@ -19,6 +19,7 @@ const $AnimationCanvas = $MainActivity.querySelector("#main-activity-svg-contain
 const $MenuContainer = window.document.documentElement.querySelector(".main-activity-menu-container");
 const $RoundsDoneEntry = $MainActivity.querySelector("#rounds-done-entry");
 const $RoundsRemainingEntry = $MainActivity.querySelector("#rounds-entry");
+const $NextSessionBtn = $MainActivity.querySelector("#btn-next");
 
 export {
   $MainActivity,
@@ -37,4 +38,5 @@ export {
   $AnimationCanvas,
   $RoundsDoneEntry,
   $RoundsRemainingEntry,
+  $NextSessionBtn,
 };
