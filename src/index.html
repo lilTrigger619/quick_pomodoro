@@ -41,7 +41,7 @@
       <div id="main-activiy-ham">menu</div>
         -->
       <button id="btn-menu" class="position-fixed top-0 start-0">menu</button>
-      <center>
+      <center id="first-header">
         <h1>Quick Pomo</h1>
       </center>
       <!--timer-->
@@ -52,15 +52,15 @@
         >
           <!--diplay the timer or show the click to continue-->
           <div class="w-75">
-            <div>yo</div>
             <div
-              class="w-100% h-25 center bg-dark text-light text-center m-auto d-flex flex-row align-items-center justify-content-center hide"
+              class="w-100% h-25 center text-light text-center m-auto d-flex flex-row align-items-center justify-content-center hide"
               id="main-activity-timerDiv"
             >
               <h1 id="timer-minute">00</h1>
-              <h1>:</h1>
+              <h1>&nbsp;:&nbsp;</h1>
               <h1 id="timer-seconds">00</h1>
             </div>
+            <center id="session-type-entry"></center>
           </div>
 
           <!-- when the timer is done -->
@@ -71,6 +71,8 @@
           <!-- canvas animation -->
           <canvas width="500" height="500" id="main-activity-svg-container">
           </canvas>
+          <div id="timer-border">
+          </div>
         </div>
       </div>
       <!--buttons-->

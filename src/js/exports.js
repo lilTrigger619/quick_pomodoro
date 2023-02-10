@@ -20,5 +20,6 @@ export {
   $RoundsDoneEntry,
   $RoundsRemainingEntry,
   $NextSessionBtn,
+  $SessionTypeEntry,
 } from "./domQueries";
 console.log('hello');

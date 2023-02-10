@@ -20,6 +20,8 @@ const $MenuContainer = window.document.documentElement.querySelector(".main-acti
 const $RoundsDoneEntry = $MainActivity.querySelector("#rounds-done-entry");
 const $RoundsRemainingEntry = $MainActivity.querySelector("#rounds-entry");
 const $NextSessionBtn = $MainActivity.querySelector("#btn-next");
+const $SessionTypeEntry = $MainActivity.querySelector("#session-type-entry");
+//console.log({$SessionType});
 
 export {
   $MainActivity,
@@ -39,4 +41,5 @@ export {
   $RoundsDoneEntry,
   $RoundsRemainingEntry,
   $NextSessionBtn,
+  $SessionTypeEntry,
 };

@@ -11,6 +11,7 @@ const {
   $RoundsDoneEntry,
   $RoundsRemainingEntry,
   $NextSessionBtn,
+  $SessionTypeEntry
 } = require("./exports"); //imports
 const { parseSettings } = require("./menu"); //imports
 import { DrawAnimator } from "./timerAnimationCanvas"; //imports
@@ -138,6 +139,8 @@ const reDrawTimer = () => {
   $RoundsDoneEntry.textContent =
     parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
   $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
+  $SessionTypeEntry.textContent = testEng.getSessionType;
+  console.log("getSessionType log...",testEng.getSessionType);
 };
 
 // end of function definitions ..........................................
@@ -170,3 +173,6 @@ $NextSessionBtn.addEventListener("click",()=>{
 });
 
 //callthe ContinueDivclick
+
+
+
