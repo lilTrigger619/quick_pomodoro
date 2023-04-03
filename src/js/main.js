@@ -138,8 +138,9 @@ const pauseStart = (e, forcePause = false) => {
 
 const reDrawTimer = () => {
   testEng.draw();
-  $RoundsDoneEntry.textContent =
-    parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
+	if (testEng.getSessionType == "Focus")
+		$RoundsDoneEntry.textContent =
+			(parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt) )+ 1;
   $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
   $SessionTypeEntry.textContent = testEng.getSessionType;
   console.log("getSessionType log...",testEng.getSessionType);
