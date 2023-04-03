@@ -70,6 +70,7 @@ function sessionTypeTimerSetter(){
       //long break;
       console.log("long break duration started");
       testEng.setTimer(parseSettings()["long break time"]);
+			console.log("type",typeof testEng, "the engine", testEng);
       testEng
         .start()
         .then(handleTimerEndPromise) //end of .then method.
@@ -117,8 +118,9 @@ const handleTimerEndPromise = () => {
 };
 
 const pauseStart = (e, forcePause = false) => {
-  if ((!toggle || !testEng.inProgress) && !forcePause) {
+  if ((!toggle && !testEng.inProgress) && !forcePause) {
     //testEng.draw();
+		console.log("type", typeof testEng, "engin", testEng);
     reDrawTimer();
     testEng
       .start()

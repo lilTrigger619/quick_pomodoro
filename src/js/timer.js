@@ -31,7 +31,7 @@ class TimerEngine {
   // to trigger the counter
   start = () => {
     console.log("started");
-    if (this.inProgress) return "already in progress";
+    if (this.inProgress) return console.log("already in progress");
     this.inProgress = true;
     return new Promise((resolve, reject) => {
       this.activeTimer = setInterval(() => {
