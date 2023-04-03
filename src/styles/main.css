@@ -28,6 +28,8 @@ main {
 
 #first-header h1 {
   color: #54deb0;
+	font-size: 1.2rem;
+	padding: 1rem;
 }
 
 #main-activity-timerDiv h1 {
