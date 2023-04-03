@@ -12,7 +12,7 @@ const ctx = $AnimationCanvas.getContext("2d");
 const circleProps = {
   posX: $AnimationCanvas.width / 2,
   posY: $AnimationCanvas.height / 2,
-  size: $AnimationCanvas.width * .49,
+  size: $AnimationCanvas.width * .39,
 };
 
 const redraw = ({ percent, color }) => {
