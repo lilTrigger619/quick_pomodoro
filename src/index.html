@@ -23,23 +23,9 @@
     </style>
   </head>
 
-  <body style="background-color: var(--bs-gray-800); color: white">
+  <body style="background-color: #30384c; color: white">
     <!--main-->
     <main id="main-activity-container">
-      <!--alert
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy shit</strong>
-        <button
-          type="button"
-          aria-label="Close"
-          data-dismiss="alert"
-          class="close"
-        >
-          x
-        </button>
-      </div>
-      -->
-
       <div class="alert alert-warning hide" role="alert" id="alerter">
         <button
           type="button"
@@ -54,6 +40,10 @@
       <!--ham menu
       <div id="main-activiy-ham">menu</div>
         -->
+      <button id="btn-menu" class="position-fixed top-0 start-0">menu</button>
+      <center id="first-header">
+        <h1>Quick Pomo</h1>
+      </center>
       <!--timer-->
       <div id="main-activity-timer-container">
         <div
@@ -63,29 +53,51 @@
           <!--diplay the timer or show the click to continue-->
           <div class="w-75">
             <div
-              class="w-100% h-25 center bg-dark text-light text-center m-auto d-flex flex-row align-items-center justify-content-center hide"
+              class="w-100% h-25 center text-light text-center m-auto d-flex flex-row align-items-center justify-content-center hide"
               id="main-activity-timerDiv"
             >
               <h1 id="timer-minute">00</h1>
-              <h1>:</h1>
+              <h1>&nbsp;:&nbsp;</h1>
               <h1 id="timer-seconds">00</h1>
             </div>
+            <center id="session-type-entry"></center>
           </div>
 
+          <!-- when the timer is done -->
           <div class="hide" id="main-activity-continueBtn">
             <h2>Click to continue to <span id="continue-entry"></span></h2>
           </div>
+
+          <!-- canvas animation -->
+          <canvas width="500" height="500" id="main-activity-svg-container">
+          </canvas>
+          <div id="timer-border">
+          </div>
         </div>
       </div>
-
       <!--buttons-->
+          <br/>
       <div id="main-activity-buttons-container" class="">
-        <div id="main-activity-buttons-wrapper" class="hstack gap-3 w-100">
-          <button id="btn-menu" class="w-100 btn btn-primary">menu</button>
-          <button id="btn-pause" class="w-100 btn btn-primary">
+        <div class="w-100 d-flex">
+          <button id="btn-pause" class="w-auto mx-auto btn btn-primary">
             pause / start
           </button>
-          <button id="btn-reset" class="w-100 btn btn-primary">reset</button>
+        </div>
+
+        <br />
+        <div class="d-flex align-content-center justify-content-between align-items-center">
+          <!-- showing remaining rounds / total rounds and reset button -->
+          <div>
+          <span id="rounds-done-entry">1</span>/<span id="rounds-entry">4</span>
+          <br />
+          <button id="btn-reset" class="w-10 btn btn-secondary">reset</button>
+          </div>
+
+          <!-- set sound and next button-->
+          <div>
+            <input type="checkbox">
+            <button id="btn-next">Next</button>
+          </div>
         </div>
       </div>
     </main>
@@ -127,41 +139,77 @@
         </div>
 
         <!--menu content-->
-        <div id="menu content">
-          <h2>Settings</h2>
-
+        <br />
+        <br />
+        <br />
+        <div id="menu-content">
           <!-- Focus session duration -->
-          <div class="menu-input-wrapper">
-            <label for="f-duration-input">Focus session duration</label>
-            <input type="number" id="f-duration-input" name="focus time" />
+          <div class="menu-input-wrapper" id="f-duration">
+            <label for="f-duration-input"> Work </label>
+            <output id="f-duration-output" class="output-data">2</output>
+            <input
+              type="range"
+              id="f-duration-input"
+              name="focus time"
+              class="edit-input"
+              min="1"
+              max="120"
+            />
+            <!--
+              <button class="edit-input">Edit</button>
+              <button class="hide done-edit-input">Done</button>
+            -->
           </div>
+          <br />
           <!-- Short break session duration -->
           <div class="menu-input-wrapper">
             <label for="sb-duration-input">Short break duration</label>
-            <input type="number" id="sb-duration-input" name="break time" />
+            <output id="sb-duration-output" class="output-data">2</output>
+            <input
+              type="range"
+              id="sb-duration-input"
+              name="break time"
+              class="edit-input"
+              min="1"
+              max="120"
+            />
           </div>
+          <br />
           <!-- long break session duration -->
           <div class="menu-input-wrapper">
             <label for="lb-duration-input">Long break duration </label>
-            <input id="lb-duration-input" name="long break time" />
+            <output id="lb-duration-output" class="output-data">2</output>
+            <input
+              type="range"
+              id="lb-duration-input"
+              name="long break time"
+              class="edit-input"
+              min="1"
+              max="120"
+            />
           </div>
           <!-- amt of focus before long break -->
+          <br />
           <div class="menu-input-wrapper">
-            <label for="amt-focus-input"
-              >Amount of focus sessions before long break</label
-            >
+            <label for="amt-focus-input">Rounds</label>
+            <output id="amt-focus-output" class="output-data">2</output>
             <input
-              type="number"
+              type="range"
               id="amt-focus-input"
               name="amt of focus before break"
+              class="edit-input"
+              min="1"
+              max="30"
             />
           </div>
           <!-- Play sound-->
+          <br />
           <div class="menu-input-wrapper">
             <label for="allow-sound-check">Play notification sound</label
             ><input id="allow-sound-check" type="checkbox" name="play sound" />
           </div>
           <!-- show notifications -->
+          <br />
           <div class="menu-input-wrapper">
             <label for="show-notification">Show notifications</label>
             <input
@@ -175,7 +223,11 @@
         <div id="sessionItem-action_buttons"></div>
 
         <!-- reset menu button-->
-        <button id="menu-reset">save</button>
+        <br />
+        <br />
+        <button id="menu-reset">Reset Defaults</button>
+        <br />
+        <br />
       </div>
     </div>
 
@@ -189,5 +241,6 @@
     <script type="module" src="./js/domQueries.js"></script>
     <script type="module" src="./js/storage.js"></script>
     <script type="module" src="./js/menu.js"></script>
+    <script type="module" src="./js/timerAnimationCanvas.js"></script>
   </body>
 </html>

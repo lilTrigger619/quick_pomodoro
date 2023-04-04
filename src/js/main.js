@@ -7,10 +7,15 @@ const {
   Notify,
   $ContinueDiv,
   $TimerDiv,
+  $ResetBtn,
+  $RoundsDoneEntry,
+  $RoundsRemainingEntry,
+  $NextSessionBtn,
+  $SessionTypeEntry
 } = require("./exports"); //imports
 const { parseSettings } = require("./menu"); //imports
+import { DrawAnimator } from "./timerAnimationCanvas"; //imports
 const testEng = new TimerEngine(); //instance of the timer engine.
-
 
 //function definitions.
 
@@ -18,10 +23,21 @@ const testEng = new TimerEngine(); //instance of the timer engine.
 export const timerSetup = (_dataStore) => {
   const amtFocus = _dataStore["amt of focus before break"];
   const focus = _dataStore["focus time"];
-  testEng.setProps(focus, amtFocus, {
-    htmlMinute: $MinuteEntry,
-    htmlSeconds: $SecondsEntry,
-  });
+  testEng.setProps(
+    focus,
+    amtFocus,
+    {
+      htmlMinute: $MinuteEntry,
+      htmlSeconds: $SecondsEntry,
+    },
+    DrawAnimator
+  );
+  //testEng.draw();
+  reDrawTimer();
+  $RoundsDoneEntry.textContent =
+    parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
+  $RoundsRemainingEntry.textContent =
+    parseSettings()["amt of focus before break"];
 }; // end of timerSetup function.
 
 //when the continue is tapped after timer completion.
@@ -30,72 +46,110 @@ export function ContinueDivClick({ message }) {
   $ContinueDiv.querySelector("span#continue-entry").textContent = message;
   $TimerDiv.parentElement.classList.add("hide");
   $ContinueDiv.classList.remove("hide");
+  /**
+  $RoundsDoneEntry.textContent =
+    parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt);
+  $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
+   **/
+  reDrawTimer();
   return new Promise(function (resolve, reject) {
     const resolver = () => {
+      resolve();
       $TimerDiv.parentElement.classList.remove("hide");
       $ContinueDiv.classList.add("hide");
-      resolve();
       return $ContinueDiv.removeEventListener("click", resolver);
     };
     $ContinueDiv.addEventListener("click", resolver);
   });
-}
+};
 
-//Function for eventlistener when the continue button is clicked on the timer completion.
-function onContinueClick() {
-  ContinueDivClick({ message: testEng.sessionType }).then(() => {
-    $NotiAudio.loop = false;
-    switch (testEng.sessionType) {
-      case "Long break":
-        //long break;
-        testEng.setTimer(_dataStore["long break time"]);
-        return testEng.start();
-        break;
-      case "Short break":
-        //short break;
-        testEng.setTimer(_dataStore["break time"]);
-        return testEng.start();
-        break;
-      case "Focus":
-        //focus;
-        testEng.setTimer(_dataStore["focus time"]);
-        testEng.start();
-        break;
-      default:
-        return null;
-        break;
-    }
-    testEng.start;
-  });
-}
+function sessionTypeTimerSetter(){
+  pauseStart(null, true);
+  switch (testEng.getSessionType) {
+    case "Long break":
+      //long break;
+      console.log("long break duration started");
+      testEng.setTimer(parseSettings()["long break time"]);
+			console.log("type",typeof testEng, "the engine", testEng);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+    case "Short break":
+      //short break;
+      testEng.setTimer(parseSettings()["break time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+    case "Focus":
+      //focus;
+      testEng.setTimer(parseSettings()["focus time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+    default:
+      testEng.setTimer(parseSettings()["focus time"]);
+      testEng
+        .start()
+        .then(handleTimerEndPromise) //end of .then method.
+        .catch((err) => console.log("er", err)); //end of .catch method.
+      break;
+  }
+};
 
-const pauseStart = () => {
-  if (!toggle || !testEng.inProgress) {
-    testEng.draw();
+// Function to show the click to continue on timer completion
+function handleClickPromise() {
+  $NotiAudio.loop = false;
+  sessionTypeTimerSetter();
+}
+//when the timer ends.
+const handleTimerEndPromise = () => {
+  console.log("got here");
+  testEng.reset();
+  $NotiAudio.loop = true;
+  parseSettings()["show notification"] ? Notify() : null;
+  parseSettings()["play sound"] ? $NotiAudio.play() : ($NotiAudio.loop = false);
+  ContinueDivClick({ message: testEng.sessionType }).then(handleClickPromise); //when the continuebtn is clicked timer completion.
+};
+
+const pauseStart = (e, forcePause = false) => {
+  if ((!toggle && !testEng.inProgress) && !forcePause) {
+    //testEng.draw();
+		console.log("type", typeof testEng, "engin", testEng);
+    reDrawTimer();
     testEng
       .start()
-      .then((res) => {
-        testEng.reset();
-        $NotiAudio.loop = true;
-        _dataStore["show notification"] ? Notify() : null;
-        _dataStore["play sound"] ? $NotiAudio.play() : null;
-        onContinueClick(); //when the continuebtn is clicked timer completion.
-      }) //end of .then method.
+      .then(handleTimerEndPromise) //end of .then method.
       .catch((err) => console.log("er", err)); //end of .catch method.
     toggle = true;
   } //end of if condition.
   else {
-    testEng.draw();
+    //testEng.draw();
+    reDrawTimer();
     testEng.pause();
     toggle = false;
   } //end of else condition.
+};
+
+const reDrawTimer = () => {
+  testEng.draw();
+	if (testEng.getSessionType == "Focus")
+		$RoundsDoneEntry.textContent =
+			(parseInt(parseSettings()["amt of focus before break"])- parseInt(testEng.remainingFocusAmt) )+ 1;
+  $RoundsRemainingEntry.textContent = parseSettings()["amt of focus before break"];
+  $SessionTypeEntry.textContent = testEng.getSessionType;
+  console.log("getSessionType log...",testEng.getSessionType);
 };
 
 // end of function definitions ..........................................
 
 const _dataStore = parseSettings();
 timerSetup(_dataStore);
-console.log({ _dataStore });
 
 let toggle = false; //global state to change when the start button is clicked.
 let completed = false; //toggled when a timer is cmpleted.
@@ -103,4 +157,25 @@ let completed = false; //toggled when a timer is cmpleted.
 //when the pause/start btn is clicked.
 $PauseStartBtn.addEventListener("click", pauseStart); //end of $Pause/start btn eventListener
 
+$ResetBtn.addEventListener("click", () => {
+  pauseStart(null, true);
+  timerSetup(parseSettings());
+});
+
+console.log({$NextSessionBtn})
+$NextSessionBtn.addEventListener("click",()=>{
+  toggle = true;
+  const settingsProps = parseSettings();
+  testEng.nextSession();
+  console.log("clicked!",
+  testEng.getSessionType);
+  sessionTypeTimerSetter();
+  pauseStart(null, true);
+  reDrawTimer();
+  //toggle = true;
+});
+
 //callthe ContinueDivclick
+
+
+

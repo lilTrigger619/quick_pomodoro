@@ -15,7 +15,13 @@ const $ContinueDiv = $MainActivity.querySelector(
   "div#main-activity-continueBtn"
 );
 const $TimerDiv = $MainActivity.querySelector("#main-activity-timerDiv");
+const $AnimationCanvas = $MainActivity.querySelector("#main-activity-svg-container");
 const $MenuContainer = window.document.documentElement.querySelector(".main-activity-menu-container");
+const $RoundsDoneEntry = $MainActivity.querySelector("#rounds-done-entry");
+const $RoundsRemainingEntry = $MainActivity.querySelector("#rounds-entry");
+const $NextSessionBtn = $MainActivity.querySelector("#btn-next");
+const $SessionTypeEntry = $MainActivity.querySelector("#session-type-entry");
+//console.log({$SessionType});
 
 export {
   $MainActivity,
@@ -31,4 +37,9 @@ export {
   $ContinueDiv,
   $TimerDiv,
   $MenuContainer,
+  $AnimationCanvas,
+  $RoundsDoneEntry,
+  $RoundsRemainingEntry,
+  $NextSessionBtn,
+  $SessionTypeEntry,
 };
